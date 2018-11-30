@@ -1,14 +1,17 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', function ($scope, AngularServices) {
-    angular.element(document).ready(function () {
-        var User = getCurrentUser();
-        if (User == null)
-            Redirect("Login.html");
-        else
-            ValidateToken();
 
+    angular.element(document).ready(function () {
+        $scope.meetingID = getQueryStringValue("meetingID");
+        $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID +"/";
+        GetPolls($scope.meetingID);
     });
-   
-    function ValidateToken() {
+
+    $("#btnMeeting").click(function () {
+        Redirect("Meetings.html");
+    });
+    $scope.Polls = [];
+
+    function GetPolls(pollID) {
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
@@ -19,15 +22,14 @@
             "email": User.Email,
             "password": User.Password
         };
-
-        AngularServices.GET("meetings", headers).
+        AngularServices.GET("meetings/" + pollID + "/polls/", headers).
             then(function (response) {
                 switch (response.status) {
                     case 200:
-                        Redirect("Meetings.html");
+                        $scope.Polls = response.data.result;
                         break;
                     case 401:
-                        AngularServices.RenewTokenOrLogout(Redirect("Meetings.html"));
+                        AngularServices.RenewTokenOrLogout(GetPolls(pollID));
                         break;
                     default:
                         Redirect("Login.html");
@@ -36,6 +38,7 @@
             }
             );
     }
+
 }];
 
 app.controller("myCtrl", myCtrl);

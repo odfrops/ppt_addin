@@ -1,19 +1,21 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', function ($scope, AngularServices) {
+
     angular.element(document).ready(function () {
-        var User = getCurrentUser();
-        if (User == null)
-            Redirect("Login.html");
-        else
-            ValidateToken();
+        GetMeetings();
 
     });
-   
-    function ValidateToken() {
+
+    $scope.Meetings = [];
+    $("#btnLogout").click(function () {
+        SaveUser(null);
+        Redirect("Login.html");
+    });
+    function GetMeetings() {
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": "Bearer " + User.Token
+            "Authorization": "Bearer " + User.Token 
         };
         var data = {
             "email": User.Email,
@@ -24,10 +26,10 @@
             then(function (response) {
                 switch (response.status) {
                     case 200:
-                        Redirect("Meetings.html");
+                        $scope.Meetings = response.data.result;
                         break;
                     case 401:
-                        AngularServices.RenewTokenOrLogout(Redirect("Meetings.html"));
+                        AngularServices.RenewTokenOrLogout(GetMeetings);
                         break;
                     default:
                         Redirect("Login.html");

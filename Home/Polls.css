@@ -69,3 +69,7 @@ h3 span {
     text-decoration: underline;
     cursor:pointer;
 }
+.unstyledLink, .unstyledLink:hover, .unstyledLink:visited {
+    color: white;
+    text-decoration: underline;
+}

@@ -23,8 +23,8 @@ app.config(['$httpProvider', function ($httpProvider) {
 //});
 //var messageBanner;
 var subDomain = "dev";
-var BaseURI = "https://" + subDomain + ".meet.ps/api/";
-
+var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
+var BaseURL = "https://" + subDomain + ".meet.ps/";
 // Error Handling Region
 //$(document).ready(function () {
 //    var element = document.querySelector('.ms-MessageBanner');
@@ -73,6 +73,12 @@ function removeObj(myObjects, prop, valu) {
     });
 
 }
+function SaveUser(User) {
+    localStorage.setObj("User", User);
+}
+function getCurrentUser() {
+    return localStorage.getObj("User");
+}
 
 
 app.service('AngularServices', ['$http', function ($http) {
@@ -82,7 +88,7 @@ app.service('AngularServices', ['$http', function ($http) {
             return $http(
                 {
                     method: 'GET',
-                    url: BaseURI + EndPoint,
+                    url: BaseAPIURI + EndPoint,
                     headers: headers
                 })
                 .then(function (response) {
@@ -95,7 +101,7 @@ app.service('AngularServices', ['$http', function ($http) {
         POST: function (EndPoint, body, headers) {
             var settings = {
                 method: 'POST',
-                url: BaseURI + EndPoint,
+                url: BaseAPIURI + EndPoint,
                 data: body,
                 headers: headers
             };
@@ -112,15 +118,46 @@ app.service('AngularServices', ['$http', function ($http) {
 
     };
 
+    API.RenewTokenOrLogout = function (cb) {
+        var User = getCurrentUser();
+        var data = {
+            "email": User.Email,
+            "password": User.Password
+        };
+        var headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+  
+        API.POST("auth", data, headers).
+            then(function (response) {
+                switch (response.status) {
+                    case 401:
+                        SaveUser(null);
+                        Redirect("Login.html");
+     
+                        break;
+                    case 200:
+                        User.Token = response.data.result.token;
+                        SaveUser(User);
+                        cb();
+                        break;
+
+                    default:
+                        SaveUser(null);
+                        Redirect("Login.html");
+                        break;
+                }
+            }
+
+            );
+
+    }
+
     return API;
 }]);
 
-function SaveUser(User) {
-    localStorage.setObj("User", User);
-}
-function getCurrentUser() {
-    return localStorage.getObj("User");
-}
+
 
 
 
