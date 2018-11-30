@@ -29,7 +29,7 @@
                             "Password": $scope.Password,
                             "Token": response.data.result.token
                         });
-                        Redirect("Main.html");
+                        Redirect("Meetings.html");
                         break;
                     default:
       
