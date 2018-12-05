@@ -24,7 +24,7 @@
             <span><a id="btnLogout">Log out &rarr;</a></span>
         </div>
         <ul>
-            <li ng-repeat="meeting in Meetings" class="text-center"><h1><a href="Polls.html?meetingID={{meeting.id}}">{{meeting.id}}</a></h1></li>
+            <li ng-repeat="meeting in Meetings | orderBy:'created'" ng-if="meeting.status!='finished'" class="text-center"><h1><a href="Polls.html?meetingID={{meeting.id}}">{{meeting.id}}</a></h1></li>
         </ul>
     </div>
 </body>

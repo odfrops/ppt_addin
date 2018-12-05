@@ -27,7 +27,7 @@
         <br />
         <h4>&nbsp; &nbsp;&nbsp;Poll</h4>
         <ul>
-            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><a class="btn selectBtn" href="">Select</a></li>
+            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><button  class="btn selectBtn" ng-click="SavePoll(poll)">Select</button></li>
         </ul>
         <h4>&nbsp; &nbsp;&nbsp;Other views</h4>
         <h3>&nbsp; &nbsp;&nbsp;<a class="unstyledLink" target="_blank" href="{{BaseURL}}#questions">Q&A slideshow</a></h3>
