@@ -4,7 +4,7 @@
     };
     angular.element(document).ready(function () {
         $scope.meetingID = getQueryStringValue("meetingID");
-        $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID +"/";
+        $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
     });
 
@@ -15,18 +15,21 @@
 
     $scope.SavePoll = function (poll) {
         Office.context.document.settings.set('BroadcastLink', poll._links['views:broadcast.polls'].href);
+        Office.context.document.settings.set('BroadcastStatus', 'None');
+        Office.context.document.settings.set('BroadcastID', poll.id);
+        Office.context.document.settings.set('MeetingID', $scope.meetingID);
         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-            Office.context.document.settings.set('SlideID', r.value.slides[0].id); 
+            Office.context.document.settings.set('SlideID', r.value.slides[0].id);
             Office.context.document.settings.saveAsync(function (asyncResult) {
                 if (asyncResult.status == Office.AsyncResultStatus.Failed) {
                     console.log('Settings save failed. Error: ' + asyncResult.error.message);
                 } else {
                     console.log('Settings saved.');
                 }
-                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(poll._links['views:broadcast.polls'].href) + "&BroadcastID=" + poll.id);
+                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(poll._links['views:broadcast.polls'].href));
             });
-                });
-    
+        });
+
 
     }
 
@@ -59,9 +62,6 @@
             }
             );
     }
-
-
-
 }];
 
 app.controller("myCtrl", myCtrl);

@@ -1,12 +1,7 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', function ($scope, AngularServices) {
     angular.element(document).ready(function () {
         Office.initialize = function (reason) {
-            var BroadcastLink = Office.context.document.settings.get('BroadcastLink');
-            if (BroadcastLink != null) {
-                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
-                return;
-            }
-
+           
             var User = getCurrentUser();
             if (User == null)
                 Redirect("Login.html");
@@ -16,7 +11,16 @@
        
 
     });
-   
+
+    function RedirectToMeetingsOrBroadcast() {
+        var BroadcastLink = Office.context.document.settings.get('BroadcastLink');
+        if (BroadcastLink != null) {
+            Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
+        }
+        else {
+            Redirect("Meetings.html");
+        }
+    }
     function ValidateToken() {
         var User = getCurrentUser();
         var headers = {
@@ -33,10 +37,10 @@
             then(function (response) {
                 switch (response.status) {
                     case 200:
-                        Redirect("Meetings.html");
+                        RedirectToMeetingsOrBroadcast();
                         break;
                     case 401:
-                        AngularServices.RenewTokenOrLogout(Redirect("Meetings.html"));
+                        AngularServices.RenewTokenOrLogout(RedirectToMeetingsOrBroadcast);
                         break;
                     default:
                         Redirect("Login.html");

@@ -98,8 +98,7 @@ app.service('AngularServices', ['$http', function ($http) {
                 }).catch(function (response) {
                     return response;
                 });
-        }
-        ,
+        },
         POST: function (EndPoint, body, headers) {
             var settings = {
                 method: 'POST',
@@ -113,11 +112,21 @@ app.service('AngularServices', ['$http', function ($http) {
                 }).catch(function (response) {
                     return response;
                 });
+        },
+        PUT: function (EndPoint, body, headers) {
+            var settings = {
+                method: 'PUT',
+                url: BaseAPIURI + EndPoint,
+                data: body,
+                headers: headers
+            };
+            return $http(settings)
+                .then(function (response) {
+                    return response;
+                }).catch(function (response) {
+                    return response;
+                });
         }
-
-
-
-
     };
 
     API.RenewTokenOrLogout = function (cb) {
@@ -137,7 +146,6 @@ app.service('AngularServices', ['$http', function ($http) {
                     case 401:
                         SaveUser(null);
                         Redirect("Login.html");
-     
                         break;
                     case 200:
                         User.Token = response.data.result.token;
@@ -151,9 +159,7 @@ app.service('AngularServices', ['$http', function ($http) {
                         break;
                 }
             }
-
             );
-
     }
 
     return API;
