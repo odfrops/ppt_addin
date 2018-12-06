@@ -149,6 +149,7 @@ app.service('AngularServices', ['$http', function ($http) {
                         break;
                     case 200:
                         User.Token = response.data.result.token;
+                        User.ClientToken = response.data.result.clientToken;
                         SaveUser(User);
                         cb();
                         break;
