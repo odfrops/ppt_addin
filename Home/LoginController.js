@@ -29,7 +29,8 @@
                         SaveUser({
                             "Email": $scope.Email,
                             "Password": $scope.Password,
-                            "Token": response.data.result.token
+                            "Token": response.data.result.token,
+                            "ClientToken": response.data.result.clientToken
                         });
                         Redirect("Meetings.html");
                         break;
