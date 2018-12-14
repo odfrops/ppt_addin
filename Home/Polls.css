@@ -1,6 +1,6 @@
 ﻿body, html {
     height: 100%;
-    overflow:hidden;
+
 }
 .mainCon {
     height: 100%;
@@ -38,8 +38,11 @@
 ul {
     list-style: none;
     padding-left: 0;
-    max-height:400px;
-    overflow:auto;
+    /*height: calc(100% - 300px);*/
+    max-height: calc(100vh - 300px);
+    /*max-height: -moz-calc(100% - 300px);
+    max-height: -webkit-calc(100% - 300px);*/
+    overflow: auto;
 }
     ul li {
         background-color: #191b1a;
