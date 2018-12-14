@@ -6,11 +6,11 @@
     <title></title>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-    <link href="Home.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="Common.js" type="text/javascript"></script>
     <script src="LoginController.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Common.css">
     <link rel="stylesheet" href="Login.css">
 
 
@@ -20,15 +20,15 @@
 
     </div>
     <div class="container mainCon">
-        <h1 class="text-center" style="font-weight:bold;">Log in</h1>
+        <h1 class="text-center" style="font-weight:bold;font-size:42px;color:#000000">Log in</h1>
         <div class="inner">
             <form ng-submit="Login()">
                 <div class="form-group">
-                    <label for="email">Your Email</label>
+                    <label for="email" style="font-size:16px">Your Email</label>
                     <input ng-model="Email" class="form-control input-lg" id="email" type="email" required/>
                 </div>
                 <p> </p>
-                <label for="password">Password</label>
+                <label for="password" style="font-size:16px">Password</label>
 
                 <div class="input-group">
                     <input ng-model="Password" class="form-control input-lg" type="password" id="password" required/>
@@ -38,7 +38,7 @@
                 <br />
 
 
-                <button id="btnLogin" class="btn btn-success btn-lg btn-block">Log in</button><br /><br />
+                <button id="btnLogin"  style="font-size:26px;font-weight:bold;" class="btn btn-success btn-lg btn-block">Log in</button><br /><br />
             </form>
         </div>
     </div>

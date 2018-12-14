@@ -15,7 +15,7 @@
     background-color: #3b4044;
     color: white;
     position: relative;
-    padding:0 15px ;
+    padding:15px ;
 }
     .header span {
         position: absolute;
@@ -50,9 +50,12 @@ ul {
 
     }
         ul li span {
-            word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             width: 80%;
             display: block;
+            font-size:22px
         }
         /*li h1 a {
     color: black;
@@ -66,11 +69,16 @@ ul {
         border-bottom: 2px solid #828186;
     }*/
         .selectBtn {
-            background-color: #9df459;
+            background-color: #A0f264;
+            border:0;
+            border-radius:0;
+            border-bottom:1.5px solid #89c55c;
             color: black;
             position: absolute;
             right: 15px;
             top:7px;
+            font-size:18px;
+            font-weight:bold;
         }
 h3 span {
     text-decoration: underline;
@@ -79,4 +87,7 @@ h3 span {
 .unstyledLink, .unstyledLink:hover, .unstyledLink:visited {
     color: white;
     text-decoration: underline;
+}
+.h1, .h2, .h3, h1, h2, h3{
+    margin:0;
 }

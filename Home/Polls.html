@@ -20,19 +20,19 @@
     <button id="btnLogin" class="btn btn-primary btn-lg">Logout</button><br /><br />-->
     <div class="container mainCon">
         <div class="header">
-            <h2 class="text-right">Available broadcast views</h2>
-            <span><a id="btnMeeting">&larr; Back to meetings</a></span>
+            <h2 style="font-size:26px;font-weight:bold;" class="text-right">Available broadcast views</h2>
+            <span><a style="font-size:18px;font-weight:lighter;" id="btnMeeting">&larr; Back to meetings</a></span>
         </div>
         <br />
         <br />
-        <h4>&nbsp; &nbsp;&nbsp;Poll</h4>
+        <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Poll</h4>
         <ul>
-            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><button  class="btn selectBtn" ng-click="SavePoll(poll)">Select</button></li>
+            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><button  class="btn selectBtn" ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)">Select</button></li>
         </ul>
-        <h4>&nbsp; &nbsp;&nbsp;Other views</h4>
-        <h3>&nbsp; &nbsp;&nbsp;<a class="unstyledLink" target="_blank" href="{{BaseURL}}#questions">Q&A slideshow</a></h3>
-        <h3>&nbsp; &nbsp;&nbsp;<a class="unstyledLink" target="_blank" href="{{BaseURL}}#questions-feed">Q&A feed</a></h3>
-        <h3>&nbsp; &nbsp;&nbsp;<a class="unstyledLink" target="_blank" href="{{BaseURL}}#polls-leaderboard">leaderboard</a></h3>
+        <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Other views</h4>
+        <h3  style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link" ng-click="SavePoll(BaseURL +'#questions',null)">Q&A slideshow</button></h3>
+        <h3 style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link"  ng-click="SavePoll(BaseURL +'#questions-feed',null)">Q&A feed</button></h3>
+        <h3 style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link"  ng-click="SavePoll(BaseURL +'#polls-leaderboard',null)">leaderboard</button></h3>
       
     </div>
 </body>

@@ -1,22 +1,18 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', function ($scope, AngularServices) {
     Office.initialize = function (reason) {
-
     };
     angular.element(document).ready(function () {
         $scope.meetingID = getQueryStringValue("meetingID");
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
     });
-
     $("#btnMeeting").click(function () {
         Redirect("Meetings.html");
     });
-
-
-    $scope.SavePoll = function (poll) {
-        Office.context.document.settings.set('BroadcastLink', poll._links['views:broadcast.polls'].href);
+    $scope.SavePoll = function (BroadcastLink,BroadcastID) {
+        Office.context.document.settings.set('BroadcastLink', BroadcastLink );
         Office.context.document.settings.set('BroadcastStatus', 'None');
-        Office.context.document.settings.set('BroadcastID', poll.id);
+        Office.context.document.settings.set('BroadcastID', BroadcastID );
         Office.context.document.settings.set('MeetingID', $scope.meetingID);
         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
             Office.context.document.settings.set('SlideID', r.value.slides[0].id);
@@ -26,15 +22,11 @@
                 } else {
                     console.log('Settings saved.');
                 }
-                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(poll._links['views:broadcast.polls'].href));
+                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
             });
         });
-
-
     }
-
     $scope.Polls = [];
-
     function GetPolls(pollID) {
         var User = getCurrentUser();
         var headers = {
