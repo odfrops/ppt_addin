@@ -7,6 +7,11 @@
     Office.initialize = function (reason) {
 
     };
+    angular.element(document).ready(function () {
+        $(".pointcur").css('cursor', 'pointer');
+
+    });
+
     $scope.Login = function () {
 
       

@@ -21,10 +21,10 @@
     <div class="container mainCon">
         <div class="header">
             <h1 class="text-center" style="font-size:26px;font-weight:bold;color:#FFFFFF">My meetings</h1>
-            <span><a id="btnLogout" style="font-size:18px;font-weight:lighter;color:#FFFFFF;opacity:0.7">Log out &rarr;</a></span>
+            <span class="pointcur"><a id="btnLogout" style="font-size:18px;font-weight:lighter;color:#FFFFFF;opacity:0.7">Log out &rarr;</a></span>
         </div>
         <ul>
-            <li ng-repeat="meeting in Meetings | orderBy:'-created'" ng-if="meeting.status!='finished'" class="text-left"><h1 style="font-size:26px;font-weight:bold;color:#282b2e"><a href="Polls.html?meetingID={{meeting.id}}">{{meeting.id}}</a></h1></li>
+            <li ng-repeat="meeting in Meetings | orderBy:'-created'" ng-if="meeting.status!='finished'" class="text-left pointcur"><h1 style="font-size:26px;font-weight:bold;color:#282b2e"><a href="Polls.html?meetingID={{meeting.id}}">{{meeting.id}}</a></h1></li>
         </ul>
     </div>
 </body>

@@ -56,6 +56,7 @@ var BaseURL = "https://" + subDomain + ".meet.ps/";
 //}
 
 
+
 function Redirect(q) {
     window.location.href = q;
 }

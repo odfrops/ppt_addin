@@ -5,6 +5,8 @@
         $scope.meetingID = getQueryStringValue("meetingID");
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
+        $(".pointcur").css('cursor', 'pointer');
+
     });
     $("#btnMeeting").click(function () {
         Redirect("Meetings.html");

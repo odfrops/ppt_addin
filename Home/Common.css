@@ -48,3 +48,10 @@
 body {
     font-family: "Proxima Nova" !important;
 }
+
+.pointcur {
+    cursor:pointer;
+}
+    .pointcur:hover {
+        cursor: pointer;
+    }

@@ -4,6 +4,7 @@
 
     };
     angular.element(document).ready(function () {
+        $(".pointcur").css('cursor', 'pointer');
 
         GetMeetings();
 
