@@ -23,6 +23,7 @@
         return Office.context.document.settings.get('BroadcastStatus');
     }
     function UpdateBroadcast(Status, MeetingID, BroadcastID) {
+      
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
@@ -62,31 +63,31 @@
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            //window.setInterval(function () {
-            //    Office.context.document.getActiveViewAsync(function (asyncResult) {
-            //        if (asyncResult.status == "failed") {
-            //            console.log("Action failed with error: " + asyncResult.error.message);
-            //        }
-            //        else {
-            //            if (asyncResult.value == 'read')
-            //                Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-            //                    if (r.status != "failed") {
-            //                        if (SlideID == r.value.slides[0].id) {
-            //                            StartBroadcast(MeetingID, BroadcastID);
-            //                        }
-            //                        else {
-            //                            EndBroadcast(MeetingID, BroadcastID);
-            //                        }
-            //                    }
+            window.setInterval(function () {
+                Office.context.document.getActiveViewAsync(function (asyncResult) {
+                    if (asyncResult.status == "failed") {
+                        console.log("Action failed with error: " + asyncResult.error.message);
+                    }
+                    else {
+                        if (asyncResult.value == 'read')
+                            Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                                if (r.status != "failed") {
+                                    if (SlideID == r.value.slides[0].id) {
+                                        StartBroadcast(MeetingID, BroadcastID);
+                                    }
+                                    else {
+                                        EndBroadcast(MeetingID, BroadcastID);
+                                    }
+                                }
 
 
-            //                });
-            //            else {
-            //                EndBroadcast(MeetingID, BroadcastID);
-            //            }
-            //        }
-            //    });
-            //}, 1000);
+                            });
+                        else {
+                            EndBroadcast(MeetingID, BroadcastID);
+                        }
+                    }
+                });
+            }, 1000);
         }
     };
 }];
