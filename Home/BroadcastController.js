@@ -43,7 +43,7 @@
                         AngularServices.RenewTokenOrLogout(UpdateBroadcast(Status, MeetingID, BroadcastID));
                         break;
                     default:
-                        Redirect("Login.html");
+                        //Redirect("Login.html");
                         break;
                 }
             }
@@ -73,6 +73,7 @@
                             Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
                                 if (r.status != "failed") {
                                     if (SlideID == r.value.slides[0].id) {
+                                   
                                         StartBroadcast(MeetingID, BroadcastID);
                                     }
                                     else {

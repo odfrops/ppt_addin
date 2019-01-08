@@ -13,7 +13,7 @@
     });
     $scope.SavePoll = function (BroadcastLink,BroadcastID) {
         Office.context.document.settings.set('BroadcastLink', BroadcastLink );
-        Office.context.document.settings.set('BroadcastStatus', 'None');
+        Office.context.document.settings.set('BroadcastStatus', 'ready');
         Office.context.document.settings.set('BroadcastID', BroadcastID );
         Office.context.document.settings.set('MeetingID', $scope.meetingID);
         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
