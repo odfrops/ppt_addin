@@ -10,15 +10,18 @@
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
   <Version>1.0.0.0</Version>
-  <ProviderName>[Provider name]</ProviderName>
+  <ProviderName>MeetingPulse</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-  <DisplayName DefaultValue="MeetingPulse" />
-  <Description DefaultValue="MeetingPulse" />
+  <DisplayName DefaultValue=" MeetingPulse - Audience interaction toolkit" />
+  <Description DefaultValue="Use this add-in to make your interactive presentation a success." />
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-  <IconUrl DefaultValue="https://inmomentsoftware.github.io/Images/Button32x32.png" />
+  <IconUrl DefaultValue="https://assets.meet.ps/ppt-addin/Images/32x32.png" />
 
-  <SupportUrl DefaultValue="http://www.contoso.com" />
+  <SupportUrl DefaultValue="https://help.meet.ps/" />
+  <AppDomains>
+    <AppDomain>https://dev.meet.ps/api/</AppDomain>
+  </AppDomains>
   <!-- Domains that will be allowed when navigating. For example, if you use ShowTaskpane and then have an href link, navigation will only be allowed if the domain is on this list. -->
   <!--End Basic Settings. -->
   
@@ -26,9 +29,9 @@
     <Host Name="Presentation" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://inmomentsoftware.github.io/Home/Index.html" />
-    <RequestedWidth>1000</RequestedWidth>
-    <RequestedHeight>700</RequestedHeight>
+    <SourceLocation DefaultValue="https://assets.meet.ps/ppt-addin/Home/Index.html" />
+    <RequestedWidth>900</RequestedWidth>
+    <RequestedHeight>480</RequestedHeight>
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
