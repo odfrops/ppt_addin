@@ -54,6 +54,10 @@
     function UpdateBroadcastLink() {
         var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        if (BroadcastID == null)
+            Link = Link.replace("#", "?t=" + User.ClientToken + "#")
+        else
         Link = Link + "?t=" + User.ClientToken;
         console.log("BroadCastLink:" + Link);
         $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
