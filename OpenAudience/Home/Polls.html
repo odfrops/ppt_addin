@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title></title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="Common.js" type="text/javascript"></script>
+    <script src="PollsController.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Common.css">
+    <link rel="stylesheet" href="Polls.css">
+</head>
+<body data-ng-app="myApp" data-ng-controller="myCtrl" ng-cloak>
+    <!--<h1>
+        Welcome To Main Page
+    </h1>
+    <button id="btnLogin" class="btn btn-primary btn-lg">Logout</button><br /><br />-->
+    <div class="container mainCon">
+        <div class="header">
+            <h2 style="font-size:26px;font-weight:bold;" class="text-right">Available broadcast views</h2>
+            <span class="pointcur"><a style="font-size:18px;font-weight:lighter;" id="btnMeeting">&larr; Back to meetings</a></span>
+        </div>
+        <br />
+        <br />
+        <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Poll</h4>
+        <ul>
+            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><button  class="btn pointcur selectBtn" ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)">Select</button></li>
+        </ul>
+        <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Other views</h4>
+        <h3  style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link" ng-click="SavePoll(BaseURL +'#questions',null)">Q&A slideshow</button></h3>
+        <h3 style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link"  ng-click="SavePoll(BaseURL +'#questions-feed',null)">Q&A feed</button></h3>
+        <h3 style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link"  ng-click="SavePoll(BaseURL +'#polls-leaderboard',null)">Leaderboard</button></h3>
+      
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-Regular.otf");
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-Bold.otf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-Extrabold.otf");
+    font-weight: bolder;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-RegularItalic.otf");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-BoldIt.otf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-Light_0.otf");
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-LightItalic.otf");
+    font-weight: lighter;
+    font-style: italic;
+}
+
+body {
+    font-family: "Proxima Nova" !important;
+}
+
+.pointcur {
+    cursor:pointer;
+}
+    .pointcur:hover {
+        cursor: pointer;
+    }
