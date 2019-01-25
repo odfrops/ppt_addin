@@ -27,11 +27,11 @@ app.filter('encodeURIComponent', function () {
 //var subDomain = "app";
 //var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
 //var BaseURL = "https://" + subDomain + ".meet.ps/";
-//var subDomain = "dev";
-//var BaseAPIURI = "https://" + subDomain + ".openmeet.eu/api/";
-//var BaseURL = "https://" + subDomain + ".openmeet.eu/";
-var BaseAPIURI = "https://openmeet.eu/api/";
-var BaseURL = "https://openmeet.eu/";
+var subDomain = "eu";
+var BaseAPIURI = "https://" + subDomain + ".openmeet.eu/api/";
+var BaseURL = "https://" + subDomain + ".openmeet.eu/";
+//var BaseAPIURI = "https://openmeet.eu/api/";
+//var BaseURL = "https://openmeet.eu/";
 
 // Error Handling Region
 //$(document).ready(function () {
