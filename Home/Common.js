@@ -24,7 +24,7 @@ app.filter('encodeURIComponent', function () {
 //    }
 //});
 //var messageBanner;
-var subDomain = "dev";
+var subDomain = "app";
 var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
 var BaseURL = "https://" + subDomain + ".meet.ps/";
 // Error Handling Region
