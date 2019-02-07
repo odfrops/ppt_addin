@@ -27,7 +27,7 @@
         <br />
         <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Poll</h4>
         <ul>
-            <li ng-repeat="poll in Polls" class="text-left"><span>{{poll.question}} </span><button  class="btn pointcur selectBtn" ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)">Select</button></li>
+            <li ng-repeat="poll in Polls" class="text-left"><span>{{CleanPoll(poll.question)}} </span><button  class="btn pointcur selectBtn" ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)">Select</button></li>
         </ul>
         <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Other views</h4>
         <h3  style="font-size:22px;">&nbsp; &nbsp;&nbsp;<button class="unstyledLink btn btn-link" ng-click="SavePoll(BaseURL +'#questions',null)">Q&A slideshow</button></h3>

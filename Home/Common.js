@@ -24,9 +24,13 @@ app.filter('encodeURIComponent', function () {
 //    }
 //});
 //var messageBanner;
+//var subDomain = "app";
+//var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
+//var BaseURL = "https://" + subDomain + ".meet.ps/";
 var subDomain = "app";
-var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
-var BaseURL = "https://" + subDomain + ".meet.ps/";
+var BaseAPIURI = "https://" + subDomain + ".openmeet.eu/api/";
+var BaseURL = "https://" + subDomain + ".openmeet.eu/";
+
 // Error Handling Region
 //$(document).ready(function () {
 //    var element = document.querySelector('.ms-MessageBanner');
