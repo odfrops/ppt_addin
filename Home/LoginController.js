@@ -28,7 +28,7 @@
             then(function (response) {
                 switch (response.status) {
                     case 401:
-                        document.getElementById("error").innerText = "Invalid credentials. Please check your email and password and retry"
+                        document.getElementById("error").innerText = response.data.error.message;
                         break;
                     case 200:
                         SaveUser({
