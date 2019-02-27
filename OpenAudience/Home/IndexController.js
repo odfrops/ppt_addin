@@ -3,12 +3,10 @@
         Office.initialize = function (reason) {
            
             var User = getCurrentUser();
-            if (User == null) {
-                Redirect("GettingStarted.html");
-            }
-            else {
+            if (User == null)
+                Redirect("Login.html");
+            else
                 ValidateToken();
-            }
         };
        
 
