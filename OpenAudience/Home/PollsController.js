@@ -29,6 +29,12 @@
         });
     }
     $scope.Polls = [];
+    $scope.CleanPoll = function (poll) {
+        if (poll.indexOf('[fmd]') > -1)
+            return JSON.parse(poll.replace('[fmd]:', '')).caption;
+        else
+            return poll;
+    }
     function GetPolls(pollID) {
         var User = getCurrentUser();
         var headers = {
