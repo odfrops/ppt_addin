@@ -1,4 +1,5 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
+    Office.initialize = function (reason) { }
     UpdateBroadcastLink();
     function EndBroadcast(MeetingID, BroadcastID) {
         if (GetBroadcastStatus() != "ready")
@@ -52,16 +53,19 @@
 
     }
     function UpdateBroadcastLink() {
-        var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
-        var User = getCurrentUser();
-        var BroadcastID = Office.context.document.settings.get('BroadcastID');
-        if (BroadcastID == null)
-            Link = Link.replace("#", "?t=" + User.ClientToken + "#")
-        else
-        Link = Link + "?t=" + User.ClientToken;
-        console.log("BroadCastLink:" + Link);
-        $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
+      
+            var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
+            var User = getCurrentUser();
+            var BroadcastID = Office.context.document.settings.get('BroadcastID');
+            if (BroadcastID == null)
+                Link = Link.replace("#", "?t=" + User.ClientToken + "#")
+            else
+                Link = Link + "?t=" + User.ClientToken;
+            console.log("BroadCastLink:" + Link);
+            $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
+       
     }
+
     Office.initialize = function (reason) {
         var SlideID = Office.context.document.settings.get('SlideID');
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
