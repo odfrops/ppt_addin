@@ -1,6 +1,17 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
-    Office.initialize = function (reason) { }
-    UpdateBroadcastLink();
+
+    angular.element(document).ready(function () {
+        Office.initialize = function (reason) {
+
+            UpdateBroadcastLink();
+        };
+
+
+    });
+    
+
+   
+    //UpdateBroadcastLink();
     function EndBroadcast(MeetingID, BroadcastID) {
         if (GetBroadcastStatus() != "ready")
             UpdateBroadcast("ready", MeetingID, BroadcastID);
