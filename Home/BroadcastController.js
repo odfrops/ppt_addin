@@ -1,7 +1,7 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
     UpdateBroadcastLink();
-    Begin();
+
     function EndBroadcast(MeetingID, BroadcastID) {
         if (GetBroadcastStatus() != "ready")
             UpdateBroadcast("ready", MeetingID, BroadcastID);
@@ -64,6 +64,7 @@
             else
                 Link = Link + "?t=" + User.ClientToken;
             console.log("BroadCastLink:" + Link);
+            Begin();
         
         }
         $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
