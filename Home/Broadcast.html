@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
     <link href="Broadcast.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
     <script src="Common.js" type="text/javascript"></script>
     <script src="BroadcastController.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,7 +17,7 @@
 </head>
 <body data-ng-app="myApp" data-ng-controller="myCtrl">
 
-    <iframe frameborder="0" ng-src="{{BroadcastLink}}"></iframe>
+    <iframe frameborder="0" ng-src="{{BroadcastLink}}" allowfullscreen></iframe>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 //Office.initialize = function (reason) {
 
 //};
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngSanitize']);
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 }]);
