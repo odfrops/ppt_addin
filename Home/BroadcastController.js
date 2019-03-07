@@ -1,13 +1,14 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
-    angular.element(document).ready(function () {
-        Office.initialize = function (reason) {
+   // angular.element(document).ready(function () {
+    Office.initialize = function (reason) {
+      
 
-            UpdateBroadcastLink();
         };
-
-
-    });
+ 
+        
+        UpdateBroadcastLink();
+    //});
     
 
    
