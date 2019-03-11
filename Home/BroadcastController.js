@@ -1,7 +1,6 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
     UpdateBroadcastLink();
-
     function EndBroadcast(MeetingID, BroadcastID) {
         if (GetBroadcastStatus() != "ready")
             UpdateBroadcast("ready", MeetingID, BroadcastID);
@@ -54,7 +53,6 @@
 
     }
     function UpdateBroadcastLink() {
-      
             var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
         Office.initialize = function (reason) {
@@ -65,7 +63,6 @@
                 Link = Link + "?t=" + User.ClientToken;
             console.log("BroadCastLink:" + Link);
             Begin();
-        
         }
         $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
          
@@ -106,6 +103,20 @@
                     });
                 }, 1000);
         }
+    }
+    $scope.RedirectToMeetings = function () {
+
+        Office.context.document.settings.set('BroadcastLink', null);
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        Office.context.document.settings.saveAsync(function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                console.log('Settings save failed. Error: ' + asyncResult.error.message);
+            } else {
+                console.log('Settings saved.');
+            }
+            Redirect("Polls.html?meetingID=" + MeetingID)
+        });
+       
     }
 
 }];

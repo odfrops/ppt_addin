@@ -44,13 +44,13 @@ var BaseURL = "https://" + subDomain + ".meet.ps/";
 //        messageBanner.hideBanner();
 //    }, 2000);
 //}
-// Helper function for treating errors
-//function errorHandler(error) {
-//    showNotification("Error", error);
-//    return error;
+//// Helper function for treating errors
+////function errorHandler(error) {
+////    showNotification("Error", error);
+////    return error;
 
-//}
-// Helper function for displaying notifications
+////}
+// //Helper function for displaying notifications
 //function showNotification(header, content) {
 //    $("#notificationHeader").text(header);
 //    $("#notificationBody").text(content);

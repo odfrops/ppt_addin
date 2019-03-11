@@ -6,6 +6,7 @@
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
         $(".pointcur").css('cursor', 'pointer');
+        showNotification("any", "any");
 
     });
     $("#btnMeeting").click(function () {

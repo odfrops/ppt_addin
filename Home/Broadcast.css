@@ -1,11 +1,31 @@
 ﻿body, html {
-   margin:0;
-   padding:0;
+    margin: 0;
+    padding: 0;
 }
+
 iframe {
     display: block; /* iframes are inline by default */
     background: #000;
     border: none; /* Reset default border */
     height: 100vh; /* Viewport-relative units */
-    width: 100vw;
+    width: 100%;
+}
+
+
+#leftDiv {
+    position: absolute;
+    background: #000;
+    left: 0;
+    top: 0;
+    bottom:0;
+    width:40px
+}
+
+#rightDiv {
+    position: absolute;
+    background: #000;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    right: 0;
 }

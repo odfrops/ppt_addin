@@ -4,6 +4,7 @@
            
             var User = getCurrentUser();
             if (User == null) {
+            
                 Redirect("GettingStarted.html");
             }
             else {
