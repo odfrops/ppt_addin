@@ -6,7 +6,7 @@
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
         $(".pointcur").css('cursor', 'pointer');
-        showNotification("any", "any");
+      
 
     });
     $("#btnMeeting").click(function () {
@@ -31,7 +31,7 @@
     }
     $scope.Polls = [];
     $scope.CleanPoll = function (poll) {
-        if (poll.indexOf('[fmd]') > -1)
+        if ( String(poll).indexOf('[fmd]') > -1)
             return JSON.parse(poll.replace('[fmd]:', '')).caption;
         else
             return poll;
@@ -64,6 +64,9 @@
                         $scope.Polls = polls.filter(function(poll) {
                             return unsupportedTypes.indexOf(poll.type) === -1;
                         });
+
+                        if ($scope.Polls.length == 0)
+                            document.getElementById("error").innerText = "No meetings have been created in this account.";
                         break;
                     case 401:
                         AngularServices.RenewTokenOrLogout(GetPolls(pollID));
