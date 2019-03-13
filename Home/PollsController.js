@@ -66,7 +66,7 @@
                         });
 
                         if ($scope.Polls.length == 0)
-                            document.getElementById("error").innerText = "No meetings have been created in this account.";
+                            document.getElementById("error").innerText = "No polls have been created in this meeting.";
                         break;
                     case 401:
                         AngularServices.RenewTokenOrLogout(GetPolls(pollID));
