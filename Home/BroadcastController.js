@@ -62,9 +62,14 @@
             else
                 Link = Link + "?t=" + User.ClientToken;
             console.log("BroadCastLink:" + Link);
+            $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
+            $scope.$apply();
             Begin();
+
         }
-        $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
+       
+        
+        //$sce.trustAsResourceUrl(Link);
          
           
        

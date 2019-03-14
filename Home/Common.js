@@ -9,6 +9,12 @@ app.config(['$httpProvider', function ($httpProvider) {
 app.filter('encodeURIComponent', function () {
     return window.encodeURIComponent;
 });
+
+app.filter('sanitizer', ['$sce', function ($sce) {
+    return function (url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
 //app.directive('onFinishRender', function ($timeout) {
 //    return {
 //        restrict: 'A',
