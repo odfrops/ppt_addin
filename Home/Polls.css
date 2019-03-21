@@ -39,7 +39,7 @@ ul {
     list-style: none;
     padding-left: 0;
     /*height: calc(100% - 300px);*/
-    max-height: calc(100vh - 300px);
+    /*max-height: calc(100vh - 300px);*/
     /*max-height: -moz-calc(100% - 300px);
     max-height: -webkit-calc(100% - 300px);*/
     overflow: auto;
