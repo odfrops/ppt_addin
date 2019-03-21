@@ -67,6 +67,8 @@
 
                         if ($scope.Polls.length == 0)
                             document.getElementById("error").innerText = "No meetings have been created in this account.";
+                        else
+                            $("ul").css("min-height","62px");
                         break;
                     case 401:
                         AngularServices.RenewTokenOrLogout(GetPolls(pollID));
