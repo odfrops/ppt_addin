@@ -32,8 +32,6 @@
                 switch (response.status) {
                     case 200:
                         $scope.Meetings = response.data.result;
-                        if ($scope.Meetings.length == 0)
-                            document.getElementById("error").innerText = "No meetings have been created in this account.";
                         break;
                     case 401:
                         AngularServices.RenewTokenOrLogout(GetMeetings);

@@ -2,19 +2,13 @@
 //Office.initialize = function (reason) {
 
 //};
-var app = angular.module('myApp', ['ngSanitize']);
+var app = angular.module('myApp', []);
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 }]);
 app.filter('encodeURIComponent', function () {
     return window.encodeURIComponent;
 });
-
-app.filter('sanitizer', ['$sce', function ($sce) {
-    return function (url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-}]);
 //app.directive('onFinishRender', function ($timeout) {
 //    return {
 //        restrict: 'A',
@@ -30,12 +24,14 @@ app.filter('sanitizer', ['$sce', function ($sce) {
 //    }
 //});
 //var messageBanner;
-var subDomain = "app";
-var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
-var BaseURL = "https://" + subDomain + ".meet.ps/";
 //var subDomain = "app";
-//var BaseAPIURI = "https://" + subDomain + ".openmeet.eu/api/";
-//var BaseURL = "https://" + subDomain + ".openmeet.eu/";
+//var BaseAPIURI = "https://" + subDomain + ".meet.ps/api/";
+//var BaseURL = "https://" + subDomain + ".meet.ps/";
+var subDomain = "eu";
+var BaseAPIURI = "https://" + subDomain + ".openmeet.eu/api/";
+var BaseURL = "https://" + subDomain + ".openmeet.eu/";
+//var BaseAPIURI = "https://openmeet.eu/api/";
+//var BaseURL = "https://openmeet.eu/";
 
 // Error Handling Region
 //$(document).ready(function () {
@@ -50,13 +46,13 @@ var BaseURL = "https://" + subDomain + ".meet.ps/";
 //        messageBanner.hideBanner();
 //    }, 2000);
 //}
-//// Helper function for treating errors
-////function errorHandler(error) {
-////    showNotification("Error", error);
-////    return error;
+// Helper function for treating errors
+//function errorHandler(error) {
+//    showNotification("Error", error);
+//    return error;
 
-////}
-// //Helper function for displaying notifications
+//}
+// Helper function for displaying notifications
 //function showNotification(header, content) {
 //    $("#notificationHeader").text(header);
 //    $("#notificationBody").text(content);

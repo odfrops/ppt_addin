@@ -6,7 +6,6 @@
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
         $(".pointcur").css('cursor', 'pointer');
-      
 
     });
     $("#btnMeeting").click(function () {
@@ -30,12 +29,6 @@
         });
     }
     $scope.Polls = [];
-    $scope.CleanPoll = function (poll) {
-        if ( String(poll).indexOf('[fmd]') > -1)
-            return JSON.parse(poll.replace('[fmd]:', '')).caption;
-        else
-            return poll;
-    }
     function GetPolls(pollID) {
         var User = getCurrentUser();
         var headers = {
@@ -47,28 +40,11 @@
             "email": User.Email,
             "password": User.Password
         };
-        // These poll types are not broadcastable right now.
-        var unsupportedTypes = [
-            // Surveys are just poll containers.
-            "group",
-            // Survey poll dividers are stub objects.
-            "divider",
-            // Grid polls are not supported as of March '19, but will be in future.
-            "rated-multiple"
-        ];
         AngularServices.GET("meetings/" + pollID + "/polls/", headers).
             then(function (response) {
                 switch (response.status) {
                     case 200:
-                        var polls = Array.isArray(response.data.result) ? response.data.result : [];
-                        $scope.Polls = polls.filter(function(poll) {
-                            return unsupportedTypes.indexOf(poll.type) === -1;
-                        });
-
-                        if ($scope.Polls.length == 0)
-                            document.getElementById("error").innerText = "No meetings have been created in this account.";
-                        else
-                            $("ul").css("min-height","62px");
+                        $scope.Polls = response.data.result;
                         break;
                     case 401:
                         AngularServices.RenewTokenOrLogout(GetPolls(pollID));
@@ -77,7 +53,8 @@
                         Redirect("Login.html");
                         break;
                 }
-            });
+            }
+            );
     }
 }];
 
