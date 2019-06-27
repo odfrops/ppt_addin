@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title></title>
+
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js" type="text/javascript"></script>
+
     <script src="Common.js" type="text/javascript"></script>
     <script src="LoginController.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Common.css">
-    <link rel="stylesheet" href="Login.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Home/Common.css" rel="stylesheet" type="text/css" />
+    <link href="/Home/Login.css" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -31,7 +34,7 @@
 
                 <div class="input-group">
                     <input ng-model="Password" class="form-control input-lg" type="password" id="password" required/>
-                    <span class="input-group-addon"><a target="_blank" href="https://app.meet.ps/login/forgot">FORGOT?</a></span>
+                    <span class="input-group-addon"><a target="_blank" href="javascript:ForgotPassword();">FORGOT?</a></span>
                 </div>
                 <br />
                 <div class="text-center" id="error"></div>

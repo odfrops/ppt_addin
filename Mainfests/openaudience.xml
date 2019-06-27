@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xsi:type="ContentApp">
+
+    <Id>0a21c844-7e41-454b-a6c4-dcb80f2dc981</Id>
+
+    <Version>1.0.0.0</Version>
+    <ProviderName>OpenMeet</ProviderName>
+    <DefaultLocale>en-US</DefaultLocale>
+    <DisplayName DefaultValue=" MeetingPulse - Audience interaction toolkit" />
+    <Description DefaultValue="Use this add-in to make your interactive presentation a success." />
+    <IconUrl DefaultValue="https://assets.meet.ps/ppt-addin/Images/OpenAudience/32x32.png" />
+
+    <SupportUrl DefaultValue="https://openaudience.co.uk/" />
+    <AppDomains>
+        <AppDomain>https://eu.openmeet.eu</AppDomain>
+    </AppDomains>
+
+    <Hosts>
+       <Host Name="Presentation" />
+    </Hosts>
+    <DefaultSettings>
+        <SourceLocation DefaultValue="https://assets.meet.ps/ppt-addin/Home/Index.html?endpoint=openeu" />
+        <RequestedWidth>900</RequestedWidth>
+        <RequestedHeight>480</RequestedHeight>
+    </DefaultSettings>
+
+    <Permissions>ReadWriteDocument</Permissions>
+
+</OfficeApp>

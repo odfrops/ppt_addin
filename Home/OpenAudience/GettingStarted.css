@@ -1,0 +1,113 @@
+﻿body, html {
+    height: 100%;
+}
+
+.body {
+    font-family: 'SF UI Display Light';
+}
+
+.container {
+    height: 100%;
+    width: 400px;
+}
+
+.logo {
+    display: block;
+    width: 60%;
+    margin: 20px 0;
+}
+
+.login {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    padding: 15px 10px;
+    background-color: #00aeef;
+    color: white;
+    text-align: center;
+}
+
+    .login:hover, .login:active, .login:link {
+        text-decoration: none;
+        outline: none;
+        color: white;
+    }
+
+h1, h2 {
+    font-weight: 600;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+h1 {
+    display: inline;
+    background-color: black;
+    color: #00aeef;
+    padding: 0 6px;
+}
+
+h2 {
+    color: #00aeef;
+    padding: 0 6px;
+}
+
+.shevron {
+    width: 20px;
+    margin: 15px 5px 10px 5px;
+}
+
+.feature {
+    position: relative;
+    margin: 15px 0;
+}
+
+    .feature .icon {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 15%;
+    }
+
+    .feature img {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+        .feature.mobile-nav img {
+            width: 67%;
+        }
+
+        .feature.desktop img {
+            width: 67%;
+        }
+
+        .feature.chart-line img {
+            width: 67%;
+        }
+
+
+    .feature .description {
+        margin-left: 17%;
+    }
+
+    .feature .header {
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .feature .info {
+        margin: 0;
+    }
+
+.support {
+    display: block;
+    margin: 20px 0;
+    color: black;
+    opacity: 0.5;
+}
+
+    .support:hover, .support:link, .support:active {
+        text-decoration: none;
+        color: black;
+    }

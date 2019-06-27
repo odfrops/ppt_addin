@@ -4,7 +4,7 @@
 font-family: 'SF UI Display Ultralight';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Ultralight'), url('sf-ui-display-ultralight-58646b19bf205.woff') format('woff');
+src: local('SF UI Display Ultralight'), url('/Home/Fonts/sf-ui-display-ultralight.woff') format('woff');
 }
 
 
@@ -12,7 +12,7 @@ src: local('SF UI Display Ultralight'), url('sf-ui-display-ultralight-58646b19bf
 font-family: 'SF UI Display Thin';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Thin'), url('sf-ui-display-thin-58646e9b26e8b.woff') format('woff');
+src: local('SF UI Display Thin'), url('/Home/Fonts/sf-ui-display-thin.woff') format('woff');
 }
 
 
@@ -20,7 +20,7 @@ src: local('SF UI Display Thin'), url('sf-ui-display-thin-58646e9b26e8b.woff') f
 font-family: 'SF UI Display Light';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Light'), url('sf-ui-display-light-58646b33e0551.woff') format('woff');
+src: local('SF UI Display Light'), url('/Home/Fonts/sf-ui-display-light.woff') format('woff');
 }
 
 
@@ -28,7 +28,7 @@ src: local('SF UI Display Light'), url('sf-ui-display-light-58646b33e0551.woff')
 font-family: 'SF UI Display Medium';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Medium'), url('sf-ui-display-medium-58646be638f96.woff') format('woff');
+src: local('SF UI Display Medium'), url('/Home/Fonts/sf-ui-display-medium.woff') format('woff');
 }
 
 
@@ -36,7 +36,7 @@ src: local('SF UI Display Medium'), url('sf-ui-display-medium-58646be638f96.woff
 font-family: 'SF UI Display Semibold';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Semibold'), url('sf-ui-display-semibold-58646eddcae92.woff') format('woff');
+src: local('SF UI Display Semibold'), url('/Home/Fonts/sf-ui-display-semibold.woff') format('woff');
 }
 
 
@@ -44,7 +44,7 @@ src: local('SF UI Display Semibold'), url('sf-ui-display-semibold-58646eddcae92.
 font-family: 'SF UI Display Bold';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Bold'), url('sf-ui-display-bold-58646a511e3d9.woff') format('woff');
+src: local('SF UI Display Bold'), url('/Home/Fonts/sf-ui-display-bold.woff') format('woff');
 }
 
 
@@ -52,7 +52,7 @@ src: local('SF UI Display Bold'), url('sf-ui-display-bold-58646a511e3d9.woff') f
 font-family: 'SF UI Display Heavy';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Heavy'), url('sf-ui-display-heavy-586470160b9e5.woff') format('woff');
+src: local('SF UI Display Heavy'), url('/Home/Fonts/sf-ui-display-heavy.woff') format('woff');
 }
 
 
@@ -60,5 +60,5 @@ src: local('SF UI Display Heavy'), url('sf-ui-display-heavy-586470160b9e5.woff')
 font-family: 'SF UI Display Black';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Black'), url('sf-ui-display-black-58646a6b80d5a.woff') format('woff');
+src: local('SF UI Display Black'), url('/Home/Fonts/sf-ui-display-black.woff') format('woff');
 }
