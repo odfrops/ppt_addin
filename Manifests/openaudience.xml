@@ -6,8 +6,8 @@
     <Version>1.0.0.0</Version>
     <ProviderName>OpenMeet</ProviderName>
     <DefaultLocale>en-US</DefaultLocale>
-    <DisplayName DefaultValue=" MeetingPulse - Audience interaction toolkit" />
-    <Description DefaultValue="Use this add-in to make your interactive presentation a success." />
+    <DisplayName DefaultValue=" OpenMeet - Audience Interaction Experts" />
+    <Description DefaultValue="Transform PowerPoint presentations with the OpenMeet Add-In." />
     <IconUrl DefaultValue="https://assets.meet.ps/ppt-addin/Images/OpenAudience/32x32.png" />
 
     <SupportUrl DefaultValue="https://openaudience.co.uk/" />

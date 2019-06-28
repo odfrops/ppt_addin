@@ -20,7 +20,7 @@ src: local('SF UI Display Thin'), url('/Home/Fonts/sf-ui-display-thin.woff') for
 font-family: 'SF UI Display Light';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Light'), url('/Home/Fonts/sf-ui-display-light.woff') format('woff');
+src: local('SF UI Display Light'), url('Fonts/sf-ui-display-light.woff') format('woff');
 }
 
 
@@ -28,7 +28,7 @@ src: local('SF UI Display Light'), url('/Home/Fonts/sf-ui-display-light.woff') f
 font-family: 'SF UI Display Medium';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Medium'), url('/Home/Fonts/sf-ui-display-medium.woff') format('woff');
+src: local('SF UI Display Medium'), url('Fonts/sf-ui-display-medium.woff') format('woff');
 }
 
 
@@ -36,7 +36,7 @@ src: local('SF UI Display Medium'), url('/Home/Fonts/sf-ui-display-medium.woff')
 font-family: 'SF UI Display Semibold';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Semibold'), url('/Home/Fonts/sf-ui-display-semibold.woff') format('woff');
+src: local('SF UI Display Semibold'), url('Fonts/sf-ui-display-semibold.woff') format('woff');
 }
 
 
@@ -44,7 +44,7 @@ src: local('SF UI Display Semibold'), url('/Home/Fonts/sf-ui-display-semibold.wo
 font-family: 'SF UI Display Bold';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Bold'), url('/Home/Fonts/sf-ui-display-bold.woff') format('woff');
+src: local('SF UI Display Bold'), url('Fonts/sf-ui-display-bold.woff') format('woff');
 }
 
 
@@ -52,7 +52,7 @@ src: local('SF UI Display Bold'), url('/Home/Fonts/sf-ui-display-bold.woff') for
 font-family: 'SF UI Display Heavy';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Heavy'), url('/Home/Fonts/sf-ui-display-heavy.woff') format('woff');
+src: local('SF UI Display Heavy'), url('Fonts/sf-ui-display-heavy.woff') format('woff');
 }
 
 
@@ -60,5 +60,5 @@ src: local('SF UI Display Heavy'), url('/Home/Fonts/sf-ui-display-heavy.woff') f
 font-family: 'SF UI Display Black';
 font-style: normal;
 font-weight: normal;
-src: local('SF UI Display Black'), url('/Home/Fonts/sf-ui-display-black.woff') format('woff');
+src: local('SF UI Display Black'), url('Fonts/sf-ui-display-black.woff') format('woff');
 }

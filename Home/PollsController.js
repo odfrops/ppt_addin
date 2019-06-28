@@ -6,7 +6,7 @@
         $scope.BaseURL = BaseURL + "broadcast/" + $scope.meetingID + "/";
         GetPolls($scope.meetingID);
         $(".pointcur").css('cursor', 'pointer');
-      
+
 
     });
     $("#btnMeeting").click(function () {
@@ -66,7 +66,7 @@
                         });
 
                         if ($scope.Polls.length == 0)
-                            document.getElementById("error").innerText = "No meetings have been created in this account.";
+                            document.getElementById("error").innerText = "No polls have been created in this meeting yet.";
                         else
                             $("ul").css("min-height","62px");
                         break;

@@ -23,6 +23,8 @@ var config = configs[mode] || configs.default;
 
 var BaseURL = "https://" + config.domain + "/";
 var BaseAPIURI = BaseURL + "api/";
+// Some assets are hosted in a subdirectory, making it nested..
+var basePath = "/Home";
 
 
 // Reprototypings.
@@ -52,13 +54,21 @@ function getCurrentUser() {
     return localStorage.getObj("User");
 }
 
+// Relative URL redirector with support for customized views depending on config/endpoint.
 function Redirect(q) {
-    // Support customized views depending on config/endpoint.
+    // Honour base relative path.
+    var currentPath = window.location.pathname.indexOf(basePath);
+    var basePrefix = window.location.pathname.substring(0, currentPath);
+    // Get the target view name, check if it has custom version.
     var view = String(q).trim().split(".").shift();
     var isCustom = config.customViews && config.customViews[view] && config.customPath;
-    var prefix = isCustom ? (config.customPath + "/") : "/Home/";
-    var suffix = mode ? ("?endpoint=" + mode) : "";
-    window.location.href = prefix + q + suffix;
+    var prefix = basePrefix + (isCustom ? (config.customPath + "/") : "/Home/");
+    // Carry over the endpoint/mode thing. Note that other strings might already be present there.
+    var queryGlue = String(q).indexOf("?") === -1 ? "?" : "&";
+    var suffix = mode ? (queryGlue + "endpoint=" + mode) : "";
+    var path = prefix + q + suffix;
+
+    window.location.href = path;
 }
 
 // TODO: ng-click this

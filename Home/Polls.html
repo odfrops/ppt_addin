@@ -10,12 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" type="text/javascript" /></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js" type="text/javascript" /></script>
 
-    <script src="/Home/Common.js" type="text/javascript"></script>
-    <script src="/Home/PollsController.js" type="text/javascript"></script>
+    <script src="Common.js" type="text/javascript"></script>
+    <script src="PollsController.js" type="text/javascript"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/Home/Common.css" rel="stylesheet" type="text/css" />
-    <link href="/Home/Polls.css" rel="stylesheet" type="text/css" />
+    <link href="Common.css" rel="stylesheet" type="text/css" />
+    <link href="Polls.css" rel="stylesheet" type="text/css" />
 </head>
 <body data-ng-app="myApp" data-ng-controller="myCtrl" ng-cloak style="overflow:hidden">
     <!--<h1>
@@ -31,7 +31,16 @@
         <br />
         <h4 style="font-size:22px;font-weight:bold;">&nbsp; &nbsp;&nbsp;Poll</h4>
         <ul ng-show="$scope.Polls.length !=0">
-            <li ng-repeat="poll in Polls" class="text-left"><span>{{CleanPoll(poll.question)}} </span><button class="btn pointcur selectBtn" ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)">Select</button></li>
+            <li
+                ng-repeat="poll in Polls"
+                class="text-left"
+            >
+                <span>{{CleanPoll(poll.question)}} </span>
+                <button
+                    class="btn pointcur selectBtn"
+                    ng-click="SavePoll(poll._links['views:broadcast.polls'].href,poll.id)"
+                >Select</button>
+            </li>
         </ul>
 
         <div class="text-center" id="error"></div>

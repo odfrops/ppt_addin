@@ -6,7 +6,7 @@
     <Version>1.0.0.0</Version>
     <ProviderName>MeetingPulse</ProviderName>
     <DefaultLocale>en-US</DefaultLocale>
-    <DisplayName DefaultValue="MeetingPulse - Dev version" />
+    <DisplayName DefaultValue="MeetingPulse - Dev" />
     <Description DefaultValue="Debug instance of MeetingPulse addin for QA" />
     <IconUrl DefaultValue="https://assets.meet.ps/ppt-addin-dev/Images/32x32.png" />
 
