@@ -15,6 +15,9 @@ var configs = {
     },
     "default": {
         "domain": "app.meet.ps"
+    },
+    "local": {
+        "domain": "local.meet.ps:8443"
     }
 };
 
