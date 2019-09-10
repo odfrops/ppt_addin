@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title></title>
+
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js" type="text/javascript"></script>
+
     <script src="Common.js" type="text/javascript"></script>
     <script src="MeetingsController.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Common.css">
-    <link rel="stylesheet" href="Meetings.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Common.css" rel="stylesheet" type="text/css" />
+    <link  href="Meetings.css" rel="stylesheet" type="text/css" />
 </head>
 <body data-ng-app="myApp" data-ng-controller="myCtrl" ng-cloak>
     <!--<h1>
@@ -25,11 +28,22 @@
             <span class="pointcur"><a id="btnLogout" style="font-size:18px;font-weight:lighter;color:#FFFFFF;opacity:0.7">Log out &rarr;</a></span>
         </div>
         <ul ng-show="Meetings.length != 0">
-            <li ng-repeat="meeting in Meetings | orderBy:'-created'" ng-if="meeting.status!='finished'" class="text-left pointcur"><h1 style="font-size:26px;font-weight:bold;color:#282b2e"><a href="Polls.html?meetingID={{meeting.id}}">{{meeting.id}}</a></h1></li>
+            <li
+                ng-repeat="meeting in Meetings | orderBy:'-created'"
+                ng-if="meeting.status!='finished'"
+                class="text-left pointcur"
+            >
+                <h1 style="font-size:26px;font-weight:bold;color:#282b2e">
+                    <a
+                        ng-click="GoToPolls($event, meeting.id)"
+                        href="#"
+                    >{{meeting.id}}</a>
+                </h1>
+            </li>
         </ul>
-       
+
         <div class="text-center" id="error"></div>
-      
+
     </div>
 </body>
 </html>

@@ -11,16 +11,23 @@
     });
 
     $scope.Meetings = [];
+
+    $scope.GoToPolls = function (e, meetingId) {
+        e.preventDefault();
+        Redirect("Polls.html?meetingId=" + meetingId);
+    };
+
     $("#btnLogout").click(function () {
         SaveUser(null);
         Redirect("Login.html");
     });
+
     function GetMeetings() {
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": "Bearer " + User.Token 
+            "Authorization": "Bearer " + User.Token
         };
         var data = {
             "email": User.Email,

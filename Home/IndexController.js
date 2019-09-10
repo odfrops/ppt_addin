@@ -1,17 +1,15 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', function ($scope, AngularServices) {
     angular.element(document).ready(function () {
         Office.initialize = function (reason) {
-           
             var User = getCurrentUser();
             if (User == null) {
-            
                 Redirect("GettingStarted.html");
             }
             else {
                 ValidateToken();
             }
         };
-       
+
 
     });
 

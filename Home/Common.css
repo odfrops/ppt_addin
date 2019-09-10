@@ -4,43 +4,43 @@
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-Regular.otf");
+    src: url("Fonts/ProximaNova-Regular.otf");
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-Bold.otf");
+    src: url("Fonts/ProximaNova-Bold.otf");
     font-weight: bold;
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-Extrabold.otf");
+    src: url("Fonts/ProximaNova-Extrabold.otf");
     font-weight: bolder;
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-RegularItalic.otf");
+    src: url("Fonts/ProximaNova-RegularItalic.otf");
     font-style: italic;
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-BoldIt.otf");
+    src: url("Fonts/ProximaNova-BoldIt.otf");
     font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-Light_0.otf");
+    src: url("Fonts/ProximaNova-Light_0.otf");
     font-weight: lighter;
 }
 
 @font-face {
     font-family: "Proxima Nova";
-    src: url("fonts/ProximaNova-LightItalic.otf");
+    src: url("Fonts/ProximaNova-LightItalic.otf");
     font-weight: lighter;
     font-style: italic;
 }
