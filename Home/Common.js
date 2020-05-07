@@ -89,10 +89,6 @@ function getQueryStringValue(key) {
 if (window.angular) {
     var app = angular.module('myApp', ['ngSanitize']);
 
-    app.config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.defaults.withCredentials = true;
-    }]);
-
     app.filter('encodeURIComponent', function () {
         return window.encodeURIComponent;
     });
