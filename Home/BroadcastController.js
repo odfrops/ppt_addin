@@ -17,14 +17,13 @@
             } else {
                 console.log('Settings saved.');
             }
-
         });
     }
     function GetBroadcastStatus() {
         return Office.context.document.settings.get('BroadcastStatus');
     }
     function UpdateBroadcast(Status, MeetingID, BroadcastID) {
-      
+
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
@@ -47,13 +46,10 @@
                         //Redirect("Login.html");
                         break;
                 }
-            }
-            );
-
-
+            });
     }
     function UpdateBroadcastLink() {
-            var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
+        var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
         Office.initialize = function (reason) {
             var BroadcastID = Office.context.document.settings.get('BroadcastID');
@@ -67,50 +63,43 @@
             Begin();
 
         }
-       
-        
-        //$sce.trustAsResourceUrl(Link);
-         
-          
-       
     }
+    function Recursive(SlideID, BroadcastID, MeetingID) {
+        Office.context.document.getActiveViewAsync(function (asyncResult) {
+            if (asyncResult.status == "failed") {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+            else {
+                if (asyncResult.value == 'read')
+                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                        if (r.status != "failed") {
+                            if (SlideID == r.value.slides[0].id) {
 
- 
-    function Begin() {
-            var SlideID = Office.context.document.settings.get('SlideID');
-            var BroadcastID = Office.context.document.settings.get('BroadcastID');
-            var MeetingID = Office.context.document.settings.get('MeetingID');
-            if (BroadcastID != null) {
-                window.setInterval(function () {
-                    Office.context.document.getActiveViewAsync(function (asyncResult) {
-                        if (asyncResult.status == "failed") {
-                            console.log("Action failed with error: " + asyncResult.error.message);
-                        }
-                        else {
-                            if (asyncResult.value == 'read')
-                                Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                                    if (r.status != "failed") {
-                                        if (SlideID == r.value.slides[0].id) {
-
-                                            StartBroadcast(MeetingID, BroadcastID);
-                                        }
-                                        else {
-                                            EndBroadcast(MeetingID, BroadcastID);
-                                        }
-                                    }
-
-
-                                });
+                                StartBroadcast(MeetingID, BroadcastID);
+                            }
                             else {
                                 EndBroadcast(MeetingID, BroadcastID);
                             }
                         }
+
+
                     });
-                }, 1000);
+                else {
+                    EndBroadcast(MeetingID, BroadcastID);
+                }
+            }
+        });
+        setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
+    }
+    function Begin() {
+        var SlideID = Office.context.document.settings.get('SlideID');
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        if (BroadcastID != null) {
+            setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
         }
     }
     $scope.RedirectToMeetings = function () {
-
         Office.context.document.settings.set('BroadcastLink', null);
         var MeetingID = Office.context.document.settings.get('MeetingID');
         Office.context.document.settings.saveAsync(function (asyncResult) {
@@ -121,9 +110,7 @@
             }
             Redirect("Polls.html?meetingID=" + MeetingID)
         });
-       
     }
-
 }];
 
 app.controller("myCtrl", myCtrl);
