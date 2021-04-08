@@ -16,7 +16,8 @@
     <DisplayName DefaultValue=" MeetingPulse - Audience interaction toolkit" />
     <Description DefaultValue="Use this add-in to make your interactive presentation a success." />
     <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-    <IconUrl DefaultValue="https://odfrops.github.io/ppt_addin/Images/32x32.png" />
+    <IconUrl DefaultValue="https://inmomentsoftware.github.io/Images/32x32.png" />
+    <!-- <IconUrl DefaultValue="https://assets.meet.ps/ppt-addin/Images/32x32.png" /> -->
 
     <SupportUrl DefaultValue="https://help.meet.ps/" />
     <AppDomains>
@@ -29,7 +30,8 @@
         <Host Name="Presentation" />
     </Hosts>
     <DefaultSettings>
-        <SourceLocation DefaultValue="https://odfrops.github.io/ppt_addin/Home/Index.html" />
+        <SourceLocation DefaultValue="https://inmomentsoftware.github.io/Home/Index.html" />
+        <!-- <SourceLocation DefaultValue="https://assets.meet.ps/ppt-addin/Home/Index.html" /> -->
         <RequestedWidth>900</RequestedWidth>
         <RequestedHeight>480</RequestedHeight>
     </DefaultSettings>
