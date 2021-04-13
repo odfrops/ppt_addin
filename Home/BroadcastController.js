@@ -67,7 +67,7 @@
 
     function setupPromise() {
         window.updatePromise = new Promise(function(resolve) {
-            Office.context.document.getActiveViewAsync(function() {
+            Office.context.document.getActiveViewAsync(function(asyncResult) {
                 if (asyncResult.status == "failed") {
                     console.log("Action failed with error: " + asyncResult.error.message);
                     resolve();
