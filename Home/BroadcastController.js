@@ -89,7 +89,7 @@
                 }
             }
         });
-        setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
+        // setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
     }
     function Begin() {
         var SlideID = Office.context.document.settings.get('SlideID');
