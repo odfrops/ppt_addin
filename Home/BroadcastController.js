@@ -66,7 +66,7 @@
     }
 
     function setupPromise() {
-        window.updatePromise = new Promise(function(resolve) {
+        var updatePromise = new Promise(function(resolve) {
             Office.context.document.getActiveViewAsync(function(asyncResult) {
                 if (asyncResult.status == "failed") {
                     console.log("Action failed with error: " + asyncResult.error.message);
@@ -95,11 +95,10 @@
                     }
                 }
             });
-        })
-        Promise.resolve(window.updatePromise).then(function(result) {
-            console.log('resolved');
+        }).then(function(result) {
+            setTimeout(setupPromise, 1000);
         });
-        window.updatePromise = null
+        Promise.resolve(updatePromise);
     }
 
     function refreshBroadcast() {
@@ -113,7 +112,7 @@
     function Begin() {
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         if (BroadcastID != null) {
-            refreshBroadcast();
+            setupPromise();
         }
     }
     $scope.RedirectToMeetings = function () {
