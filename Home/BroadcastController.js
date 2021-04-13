@@ -73,6 +73,8 @@
                     resolve();
                 }
                 else {
+                    var BroadcastID = Office.context.document.settings.get('BroadcastID');
+                    var MeetingID = Office.context.document.settings.get('MeetingID');
                     if (asyncResult.value == 'read') {
                         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
                             if (r.status != "failed") {
