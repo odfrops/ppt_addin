@@ -90,19 +90,18 @@
                 }
             }
         });
-    }
+}
 
     function Begin() {
         var SlideID = Office.context.document.settings.get('SlideID');
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            // setInterval(Recursive, 1000, SlideID, BroadcastID, MeetingID)
-            // setTimeout((function (SlideID, BroadcastID, MeetingID) {
-            //     return function () {
-            //         RecursiveA(SlideID, BroadcastID, MeetingID);
-            //     };
-            // })(SlideID, BroadcastID, MeetingID), 1000);
+            setInterval((function (SlideID, BroadcastID, MeetingID) {
+                return function () {
+                    Recursive(SlideID, BroadcastID, MeetingID);
+                };
+            })(SlideID, BroadcastID, MeetingID), 1000);
         }
     }
     $scope.RedirectToMeetings = function () {
