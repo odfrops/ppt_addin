@@ -65,42 +65,46 @@
         }
     }
 
-    window.updatePromise = new Promise(function(resolve) {
-        Office.context.document.getActiveViewAsync(function() {
-            if (asyncResult.status == "failed") {
-                console.log("Action failed with error: " + asyncResult.error.message);
-                resolve();
-            }
-            else {
-                if (asyncResult.value == 'read') {
-                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                        if (r.status != "failed") {
-                            var SlideID = Office.context.document.settings.get('SlideID');
-                            var BroadcastID = Office.context.document.settings.get('BroadcastID');
-                            var MeetingID = Office.context.document.settings.get('MeetingID');
-                            if (SlideID == r.value.slides[0].id) {
-                                StartBroadcast(MeetingID, BroadcastID);
-                            }
-                            else {
-                                EndBroadcast(MeetingID, BroadcastID);
-                            }
-                        }
-                        resolve();
-                    });
-                }
-                else {
-                    EndBroadcast(MeetingID, BroadcastID);
+    function setupPromise() {
+        window.updatePromise = new Promise(function(resolve) {
+            Office.context.document.getActiveViewAsync(function() {
+                if (asyncResult.status == "failed") {
+                    console.log("Action failed with error: " + asyncResult.error.message);
                     resolve();
                 }
-            }
+                else {
+                    if (asyncResult.value == 'read') {
+                        Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                            if (r.status != "failed") {
+                                var SlideID = Office.context.document.settings.get('SlideID');
+                                var BroadcastID = Office.context.document.settings.get('BroadcastID');
+                                var MeetingID = Office.context.document.settings.get('MeetingID');
+                                if (SlideID == r.value.slides[0].id) {
+                                    StartBroadcast(MeetingID, BroadcastID);
+                                }
+                                else {
+                                    EndBroadcast(MeetingID, BroadcastID);
+                                }
+                            }
+                            resolve();
+                        });
+                    }
+                    else {
+                        EndBroadcast(MeetingID, BroadcastID);
+                        resolve();
+                    }
+                }
+            });
+        })
+        Promise.resolve(window.updatePromise).then(function(result) {
+            console.log('resolved');
         });
-    })
+        window.updatePromise = null
+    }
 
     function refreshBroadcast() {
         var a = setInterval(function () {
-            Promise.resolve(window.updatePromise).then(function(result) {
-                console.log('resolved')
-            });
+            setupPromise();
             clearInterval(a);
             refreshBroadcast();
         }, 1000);
