@@ -76,17 +76,17 @@
                         if (r.status != "failed") {
                             if (SlideID == r.value.slides[0].id) {
 
-                                // StartBroadcast(MeetingID, BroadcastID);
+                                StartBroadcast(MeetingID, BroadcastID);
                             }
                             else {
-                                // EndBroadcast(MeetingID, BroadcastID);
+                                EndBroadcast(MeetingID, BroadcastID);
                             }
                         }
 
 
                     });
                 else {
-                    // EndBroadcast(MeetingID, BroadcastID);
+                    EndBroadcast(MeetingID, BroadcastID);
                 }
             }
         });
@@ -97,7 +97,7 @@
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            setInterval(Recursive, 1000, SlideID, BroadcastID, MeetingID)
+            // setInterval(Recursive, 1000, SlideID, BroadcastID, MeetingID)
             // setTimeout((function (SlideID, BroadcastID, MeetingID) {
             //     return function () {
             //         RecursiveA(SlideID, BroadcastID, MeetingID);
