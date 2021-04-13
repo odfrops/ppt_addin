@@ -96,17 +96,18 @@
         });
     })
 
-    function refreshBroadcast(SlideID, BroadcastID, MeetingID) {
+    function refreshBroadcast() {
         var a = setInterval(function () {
             Promise.resolve(window.updatePromise)
             clearInterval(a);
-            refreshBroadcast(SlideID, BroadcastID, MeetingID);
+            refreshBroadcast();
         }, 1000);
     }
 
     function Begin() {
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
         if (BroadcastID != null) {
-            refreshBroadcast(SlideID, BroadcastID, MeetingID);
+            refreshBroadcast();
         }
     }
     $scope.RedirectToMeetings = function () {
