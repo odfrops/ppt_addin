@@ -64,32 +64,34 @@
 
         }
     }
+
+    function getActiveViewResult(asyncResult) {
+        // if (asyncResult.status == "failed") {
+        //     console.log("Action failed with error: " + asyncResult.error.message);
+        // }
+        // else {
+        //     if (asyncResult.value == 'read')
+        //         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+        //             if (r.status != "failed") {
+        //                 if (SlideID == r.value.slides[0].id) {
+
+        //                     StartBroadcast(MeetingID, BroadcastID);
+        //                 }
+        //                 else {
+        //                     EndBroadcast(MeetingID, BroadcastID);
+        //                 }
+        //             }
+
+
+        //         });
+        //     else {
+        //         EndBroadcast(MeetingID, BroadcastID);
+        //     }
+        // }
+    }
     function refreshBroadcast(SlideID, BroadcastID, MeetingID) {
         var a = setInterval(function () {
-            Office.context.document.getActiveViewAsync(function (asyncResult) {
-                // if (asyncResult.status == "failed") {
-                //     console.log("Action failed with error: " + asyncResult.error.message);
-                // }
-                // else {
-                //     if (asyncResult.value == 'read')
-                //         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                //             if (r.status != "failed") {
-                //                 if (SlideID == r.value.slides[0].id) {
-    
-                //                     StartBroadcast(MeetingID, BroadcastID);
-                //                 }
-                //                 else {
-                //                     EndBroadcast(MeetingID, BroadcastID);
-                //                 }
-                //             }
-    
-    
-                //         });
-                //     else {
-                //         EndBroadcast(MeetingID, BroadcastID);
-                //     }
-                // }
-            });
+            Office.context.document.getActiveViewAsync(getActiveViewResult);
             clearInterval(a);
             refreshBroadcast(SlideID, BroadcastID, MeetingID);
         }, 1000);
