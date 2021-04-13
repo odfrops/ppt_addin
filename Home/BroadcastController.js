@@ -52,6 +52,7 @@
         var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
         Office.initialize = function (reason) {
+            registerActiveViewChanged();
             var BroadcastID = Office.context.document.settings.get('BroadcastID');
             if (BroadcastID == null)
                 Link = Link.replace("#", "?t=" + User.ClientToken + "#")
@@ -63,6 +64,22 @@
             Begin();
 
         }
+    }
+
+    function registerActiveViewChanged() {
+        window.activeViewHandler = function (args) {
+            console.log(args);
+        }
+    
+        Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler,
+            function (asyncResult) {
+                if (asyncResult.status == "failed") {
+                    app.showNotification("Action failed with error: " + asyncResult.error.message);
+                }
+                else {
+                    console.log(asyncResult);
+                }
+            });
     }
 
     function getActiveViewResult(asyncResult) {
