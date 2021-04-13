@@ -98,8 +98,6 @@
         //                     EndBroadcast(MeetingID, BroadcastID);
         //                 }
         //             }
-
-
         //         });
         //     else {
         //         EndBroadcast(MeetingID, BroadcastID);
@@ -108,7 +106,18 @@
     }
     function refreshBroadcast(SlideID, BroadcastID, MeetingID) {
         var a = setInterval(function () {
-            Office.context.document.getActiveViewAsync(getActiveViewResult);
+            // Office.context.document.getActiveViewAsync(getActiveViewResult);
+
+            Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                if (r.status != "failed") {
+                    if (SlideID == r.value.slides[0].id) {
+                        StartBroadcast(MeetingID, BroadcastID);
+                    } else {
+                        EndBroadcast(MeetingID, BroadcastID);
+                    }
+                }
+            });
+
             clearInterval(a);
             refreshBroadcast(SlideID, BroadcastID, MeetingID);
         }, 1000);
@@ -119,32 +128,7 @@
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            // refreshBroadcast(SlideID, BroadcastID, MeetingID);
-
-            //Automatically refresh
-            window.setInterval(function () {
-                //get the current slide
-                Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-
-                    // null check
-                    if (!r || !r.value || !r.value.slides) {
-                        return;
-                    }
-
-                    //get current slides index
-                    currentSlide = r.value.slides[0].id;
-
-                    //check if current slide and stored setting are the same
-                    if (currentSlide != SlideID) {
-                        //the slide changed - do something
-                        //update the stored setting for current slide
-                        console.log('different slide id')
-                    } else {
-                        console.log('same slide id')
-                    }
-                });
-
-            }, 1000);
+            refreshBroadcast(SlideID, BroadcastID, MeetingID);
         }
     }
     $scope.RedirectToMeetings = function () {
