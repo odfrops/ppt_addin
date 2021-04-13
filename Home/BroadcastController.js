@@ -76,17 +76,17 @@
                         if (r.status != "failed") {
                             if (SlideID == r.value.slides[0].id) {
 
-                                StartBroadcast(MeetingID, BroadcastID);
+                                // StartBroadcast(MeetingID, BroadcastID);
                             }
                             else {
-                                EndBroadcast(MeetingID, BroadcastID);
+                                // EndBroadcast(MeetingID, BroadcastID);
                             }
                         }
 
 
                     });
                 else {
-                    EndBroadcast(MeetingID, BroadcastID);
+                    // EndBroadcast(MeetingID, BroadcastID);
                 }
             }
         });
