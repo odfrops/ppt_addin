@@ -70,7 +70,7 @@
         window.activeViewHandler = function (args) {
             console.log(args);
         }
-    
+
         Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler,
             function (asyncResult) {
                 if (asyncResult.status == "failed") {
@@ -119,7 +119,32 @@
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            refreshBroadcast(SlideID, BroadcastID, MeetingID);
+            // refreshBroadcast(SlideID, BroadcastID, MeetingID);
+
+            //Automatically refresh
+            window.setInterval(function () {
+                //get the current slide
+                Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+
+                    // null check
+                    if (!r || !r.value || !r.value.slides) {
+                        return;
+                    }
+
+                    //get current slides index
+                    currentSlide = r.value.slides[0].index;
+
+                    //check if current slide and stored setting are the same
+                    if (currentSlide != SlideID) {
+                        //the slide changed - do something
+                        //update the stored setting for current slide
+                        console.log('different slide id')
+                    } else {
+                        console.log('same slide id')
+                    }
+                });
+
+            }, 1500);
         }
     }
     $scope.RedirectToMeetings = function () {
