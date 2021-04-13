@@ -132,7 +132,7 @@
                     }
 
                     //get current slides index
-                    currentSlide = r.value.slides[0].index;
+                    currentSlide = r.value.slides[0].id;
 
                     //check if current slide and stored setting are the same
                     if (currentSlide != SlideID) {
@@ -144,7 +144,7 @@
                     }
                 });
 
-            }, 1500);
+            }, 1000);
         }
     }
     $scope.RedirectToMeetings = function () {
