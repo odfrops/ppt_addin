@@ -65,7 +65,7 @@
         }
     }
 
-    function RecursiveA(SlideID, BroadcastID, MeetingID) {
+    function Recursive(SlideID, BroadcastID, MeetingID) {
         Office.context.document.getActiveViewAsync(function (asyncResult) {
             if (asyncResult.status == "failed") {
                 console.log("Action failed with error: " + asyncResult.error.message);
@@ -90,43 +90,23 @@
                 }
             }
         });
-        setTimeout(RecursiveB, 1000, SlideID, BroadcastID, MeetingID);
-    }
-
-    function RecursiveB(SlideID, BroadcastID, MeetingID) {
-        Office.context.document.getActiveViewAsync(function (asyncResult) {
-            if (asyncResult.status == "failed") {
-                console.log("Action failed with error: " + asyncResult.error.message);
-            }
-            else {
-                if (asyncResult.value == 'read')
-                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                        if (r.status != "failed") {
-                            if (SlideID == r.value.slides[0].id) {
-
-                                StartBroadcast(MeetingID, BroadcastID);
-                            }
-                            else {
-                                EndBroadcast(MeetingID, BroadcastID);
-                            }
-                        }
-
-
-                    });
-                else {
-                    EndBroadcast(MeetingID, BroadcastID);
-                }
-            }
-        });
-        setTimeout(RecursiveA, 1000, SlideID, BroadcastID, MeetingID);
-    }
+        setTimeout( (function(SlideID, BroadcastID, MeetingID) {
+            return function() {
+                Recursive(SlideID, BroadcastID, MeetingID);
+            };
+        })(SlideID, BroadcastID, MeetingID) , 1000);
+}
 
     function Begin() {
         var SlideID = Office.context.document.settings.get('SlideID');
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            setTimeout(RecursiveA, 1000, SlideID, BroadcastID, MeetingID);
+            setTimeout( (function(SlideID, BroadcastID, MeetingID) {
+                return function() {
+                    Recursive(SlideID, BroadcastID, MeetingID);
+                };
+            })(SlideID, BroadcastID, MeetingID) , 1000);
         }
     }
     $scope.RedirectToMeetings = function () {
