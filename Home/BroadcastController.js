@@ -48,11 +48,11 @@
                 }
             });
     }
+
     function UpdateBroadcastLink() {
         var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
         Office.initialize = function (reason) {
-            registerActiveViewChanged();
             var BroadcastID = Office.context.document.settings.get('BroadcastID');
             if (BroadcastID == null)
                 Link = Link.replace("#", "?t=" + User.ClientToken + "#")
@@ -62,71 +62,49 @@
             $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
             $scope.$apply();
             Begin();
-
         }
     }
 
-    function registerActiveViewChanged() {
-        window.activeViewHandler = function (args) {
-            console.log(args);
-        }
-
-        Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler,
-            function (asyncResult) {
-                if (asyncResult.status == "failed") {
-                    app.showNotification("Action failed with error: " + asyncResult.error.message);
+    window.updatePromise = new Promise(function(resolve) {
+        Office.context.document.getActiveViewAsync(function() {
+            if (asyncResult.status == "failed") {
+                console.log("Action failed with error: " + asyncResult.error.message);
+                resolve();
+            }
+            else {
+                if (asyncResult.value == 'read') {
+                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                        if (r.status != "failed") {
+                            var SlideID = Office.context.document.settings.get('SlideID');
+                            var BroadcastID = Office.context.document.settings.get('BroadcastID');
+                            var MeetingID = Office.context.document.settings.get('MeetingID');
+                            if (SlideID == r.value.slides[0].id) {
+                                StartBroadcast(MeetingID, BroadcastID);
+                            }
+                            else {
+                                EndBroadcast(MeetingID, BroadcastID);
+                            }
+                        }
+                        resolve();
+                    });
                 }
                 else {
-                    console.log(asyncResult);
+                    EndBroadcast(MeetingID, BroadcastID);
+                    resolve();
                 }
-            });
-    }
+            }
+        });
+    })
 
-    function getActiveViewResult(asyncResult) {
-        // if (asyncResult.status == "failed") {
-        //     console.log("Action failed with error: " + asyncResult.error.message);
-        // }
-        // else {
-        //     if (asyncResult.value == 'read')
-        //         Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-        //             if (r.status != "failed") {
-        //                 if (SlideID == r.value.slides[0].id) {
-
-        //                     StartBroadcast(MeetingID, BroadcastID);
-        //                 }
-        //                 else {
-        //                     EndBroadcast(MeetingID, BroadcastID);
-        //                 }
-        //             }
-        //         });
-        //     else {
-        //         EndBroadcast(MeetingID, BroadcastID);
-        //     }
-        // }
-    }
     function refreshBroadcast(SlideID, BroadcastID, MeetingID) {
         var a = setInterval(function () {
-            // Office.context.document.getActiveViewAsync(getActiveViewResult);
-
-            Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                if (r.status != "failed") {
-                    if (SlideID == r.value.slides[0].id) {
-                        StartBroadcast(MeetingID, BroadcastID);
-                    } else {
-                        EndBroadcast(MeetingID, BroadcastID);
-                    }
-                }
-            });
-
+            Promise.resolve(window.updatePromise)
             clearInterval(a);
             refreshBroadcast(SlideID, BroadcastID, MeetingID);
         }, 1000);
     }
 
     function Begin() {
-        var SlideID = Office.context.document.settings.get('SlideID');
-        var BroadcastID = Office.context.document.settings.get('BroadcastID');
-        var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
             refreshBroadcast(SlideID, BroadcastID, MeetingID);
         }
