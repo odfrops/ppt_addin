@@ -65,7 +65,7 @@
         }
     }
     function refreshBroadcast(SlideID, BroadcastID, MeetingID) {
-        var a = setInterval((function (SlideID, BroadcastID, MeetingID) {
+        var a = setInterval(function () {
             Office.context.document.getActiveViewAsync(function (asyncResult) {
                 if (asyncResult.status == "failed") {
                     console.log("Action failed with error: " + asyncResult.error.message);
@@ -92,7 +92,7 @@
             });
             clearInterval(a);
             refreshBroadcast(SlideID, BroadcastID, MeetingID);
-        })(SlideID, BroadcastID, MeetingID), 1000);
+        }, 1000);
     }
 
     function Begin() {
