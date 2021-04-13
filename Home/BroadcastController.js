@@ -63,34 +63,33 @@
             Begin();
         }
     }
+    function getActiveViewCallback(asyncResult) {
+        if (asyncResult.status == "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        }
+        else {
+            // if (asyncResult.value == 'read')
+            //     Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+            //         if (r.status != "failed") {
+            //             if (window._slide_id == r.value.slides[0].id) {
 
+            //                 StartBroadcast(window._meeting_id, window._broadcase_id);
+            //             }
+            //             else {
+            //                 EndBroadcast(window._meeting_id, window._broadcase_id);
+            //             }
+            //         }
+
+
+            //     });
+            // else {
+            //     EndBroadcast(window._meeting_id, window._broadcase_id);
+            // }
+        }
+    }
     function updateLoop() {
-        Office.context.document.getActiveViewAsync(function (asyncResult) {
-            if (asyncResult.status == "failed") {
-                console.log("Action failed with error: " + asyncResult.error.message);
-            }
-            else {
-                if (asyncResult.value == 'read')
-                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                        if (r.status != "failed") {
-                            if (window._slide_id == r.value.slides[0].id) {
-
-                                StartBroadcast(window._meeting_id, window._broadcase_id);
-                            }
-                            else {
-                                EndBroadcast(window._meeting_id, window._broadcase_id);
-                            }
-                        }
-
-
-                    });
-                else {
-                    EndBroadcast(window._meeting_id, window._broadcase_id);
-                }
-            }
-        });
-}
-
+        Office.context.document.getActiveViewAsync(getActiveViewCallback);
+    }
     function Begin() {
         window._slide_id = Office.context.document.settings.get('SlideID');
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
