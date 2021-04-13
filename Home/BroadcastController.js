@@ -64,7 +64,8 @@
 
         }
     }
-    function Recursive(SlideID, BroadcastID, MeetingID) {
+
+    function RecursiveA(SlideID, BroadcastID, MeetingID) {
         Office.context.document.getActiveViewAsync(function (asyncResult) {
             if (asyncResult.status == "failed") {
                 console.log("Action failed with error: " + asyncResult.error.message);
@@ -89,14 +90,43 @@
                 }
             }
         });
-        // setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
+        setTimeout(RecursiveB, 1000, SlideID, BroadcastID, MeetingID);
     }
+
+    function RecursiveB(SlideID, BroadcastID, MeetingID) {
+        Office.context.document.getActiveViewAsync(function (asyncResult) {
+            if (asyncResult.status == "failed") {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+            else {
+                if (asyncResult.value == 'read')
+                    Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
+                        if (r.status != "failed") {
+                            if (SlideID == r.value.slides[0].id) {
+
+                                StartBroadcast(MeetingID, BroadcastID);
+                            }
+                            else {
+                                EndBroadcast(MeetingID, BroadcastID);
+                            }
+                        }
+
+
+                    });
+                else {
+                    EndBroadcast(MeetingID, BroadcastID);
+                }
+            }
+        });
+        setTimeout(RecursiveA, 1000, SlideID, BroadcastID, MeetingID);
+    }
+
     function Begin() {
         var SlideID = Office.context.document.settings.get('SlideID');
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if (BroadcastID != null) {
-            setTimeout(Recursive, 1000, SlideID, BroadcastID, MeetingID);
+            setTimeout(RecursiveA, 1000, SlideID, BroadcastID, MeetingID);
         }
     }
     $scope.RedirectToMeetings = function () {
