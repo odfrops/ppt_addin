@@ -98,7 +98,9 @@
 
     function refreshBroadcast() {
         var a = setInterval(function () {
-            Promise.resolve(window.updatePromise)
+            Promise.resolve(window.updatePromise).then(function(result) {
+                console.log('resolved')
+            });
             clearInterval(a);
             refreshBroadcast();
         }, 1000);
