@@ -104,6 +104,9 @@
             setTimeout(updateLoop, 100);
         } else {
             window._asyncCount = 0;
+            if (typeof(window.CollectGarbage) === 'function') {
+                window.CollectGarbage()
+            }
         }
     }
     function Begin() {
