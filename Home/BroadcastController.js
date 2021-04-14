@@ -87,24 +87,31 @@
             // }
         }
     }
+    window._asyncCount = 0;
     async function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
         var promise = new OfficeExtension.Promise(function (resolve) {
             Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function(asyncResult) {
                 resolve(asyncResult);
             });
-        })
+        });
         var result = await promise;
         console.log(result);
         promise = null;
         result = null;
+        if (window._asyncCount < 1000) {
+            ++ window._asyncCount;
+            setTimeout(updateLoop, 100);
+        } else {
+            window._asyncCount = 0;
+        }
     }
     function Begin() {
         window._slide_id = Office.context.document.settings.get('SlideID');
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
         window._meeting_id = Office.context.document.settings.get('MeetingID');
         if (window._broadcase_id != null) {
-            setInterval(updateLoop, 1000);
+            setTimeout(updateLoop, 100);
         }
     }
     $scope.RedirectToMeetings = function () {
