@@ -99,7 +99,7 @@
         console.log(result);
         promise = null;
         result = null;
-        if (window._asyncCount < 1000) {
+        if (window._asyncCount < 200) {
             ++ window._asyncCount;
             setTimeout(updateLoop, 100);
         } else {
