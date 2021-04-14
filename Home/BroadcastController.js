@@ -90,7 +90,7 @@
     async function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
         var promise = new OfficeExtension.Promise(function (resolve) {
-            Office.context.document.getActiveViewAsync(function(asyncResult) {
+            Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function(asyncResult) {
                 resolve(asyncResult);
             });
         })
