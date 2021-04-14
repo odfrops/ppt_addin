@@ -63,7 +63,7 @@
             Begin();
         }
     }
-    function getActiveViewCallback(asyncResult) {
+    window.getActiveViewCallback = function getActiveViewCallback(asyncResult) {
         if (asyncResult.status == "failed") {
             console.log("Action failed with error: " + asyncResult.error.message);
         }
@@ -92,10 +92,13 @@
         var promise = new OfficeExtension.Promise(function (resolve) {
             // resolve();
             Office.context.document.getActiveViewAsync(function(asyncResult) {
-                resolve();
+                setTimeout(function() {
+                    resolve();
+                }, 1000)
             });
         }).then(function(result) {
-            console.log('resolved');
+            // console.log('resolved');
+            updateLoop();
         });
         OfficeExtension.Promise.resolve(promise);
         promise = null;
@@ -105,7 +108,8 @@
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
         window._meeting_id = Office.context.document.settings.get('MeetingID');
         if (window._broadcase_id != null) {
-            setInterval(updateLoop, 2000);
+            // setInterval(updateLoop, 2000);
+            updateLoop();
         }
     }
     $scope.RedirectToMeetings = function () {
