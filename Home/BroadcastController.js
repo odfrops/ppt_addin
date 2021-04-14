@@ -90,7 +90,10 @@
     function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
         var promise = new OfficeExtension.Promise(function (resolve) {
-            resolve();
+            // resolve();
+            Office.context.document.getActiveViewAsync(function(asyncResult) {
+                resolve();
+            });
         }).then(function(result) {
             console.log('resolved');
         });
