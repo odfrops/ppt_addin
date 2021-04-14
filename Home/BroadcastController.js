@@ -99,12 +99,12 @@
         console.log(result);
         promise = null;
         result = null;
-        if (window._asyncCount < 200) {
+        if (window._asyncCount < 100) {
             ++ window._asyncCount;
-            setTimeout(updateLoop, 100);
         } else {
             window._asyncCount = 0;
-            if (typeof(window.CollectGarbage) === 'function') {
+            clearInterval(window._interval_id)
+            if (typeof(window.CollectGarbage) == 'function') {
                 window.CollectGarbage()
             }
         }
@@ -114,7 +114,7 @@
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
         window._meeting_id = Office.context.document.settings.get('MeetingID');
         if (window._broadcase_id != null) {
-            setTimeout(updateLoop, 100);
+            window._interval_id = setInterval(updateLoop, 100);
         }
     }
     $scope.RedirectToMeetings = function () {
