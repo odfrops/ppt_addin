@@ -87,20 +87,16 @@
             // }
         }
     }
-    function updateLoop() {
+    async function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
-        var promise = new OfficeExtension.Promise(function (resolve) {
+        var promise = await new OfficeExtension.Promise(function (resolve) {
             // resolve();
             Office.context.document.getActiveViewAsync(function(asyncResult) {
                 setTimeout(function() {
-                    resolve();
+                    resolve(asyncResult);
                 }, 1000)
             });
-        }).then(function(result) {
-            // console.log('resolved');
-            updateLoop();
-        });
-        OfficeExtension.Promise.resolve(promise);
+        })
         promise = null;
     }
     function Begin() {
@@ -108,8 +104,7 @@
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
         window._meeting_id = Office.context.document.settings.get('MeetingID');
         if (window._broadcase_id != null) {
-            // setInterval(updateLoop, 2000);
-            updateLoop();
+            setInterval(updateLoop, 1000);
         }
     }
     $scope.RedirectToMeetings = function () {
