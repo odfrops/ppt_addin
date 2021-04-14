@@ -103,10 +103,8 @@
             ++ window._asyncCount;
         } else {
             window._asyncCount = 0;
-            clearInterval(window._interval_id)
-            if (typeof(window.CollectGarbage) == 'function') {
-                window.CollectGarbage()
-            }
+            clearInterval(window._interval_id);
+            window.location.reload();
         }
     }
     function Begin() {
