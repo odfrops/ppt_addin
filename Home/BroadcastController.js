@@ -88,7 +88,14 @@
         }
     }
     function updateLoop() {
-        Office.context.document.getActiveViewAsync(getActiveViewCallback);
+        // Office.context.document.getActiveViewAsync(getActiveViewCallback);
+        var promise = new OfficeExtension.Promise(function (resolve) {
+            resolve();
+        }).then(function(result) {
+            console.log('resolved');
+        });
+        OfficeExtension.Promise.resolve(promise);
+        promise = null;
     }
     function Begin() {
         window._slide_id = Office.context.document.settings.get('SlideID');
