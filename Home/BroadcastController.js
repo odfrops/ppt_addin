@@ -89,15 +89,15 @@
     }
     async function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
-        var promise = await new OfficeExtension.Promise(function (resolve) {
-            // resolve();
+        var promise = new OfficeExtension.Promise(function (resolve) {
             Office.context.document.getActiveViewAsync(function(asyncResult) {
-                setTimeout(function() {
-                    resolve(asyncResult);
-                }, 1000)
+                resolve(asyncResult);
             });
         })
+        var result = await promise;
+        console.log(result);
         promise = null;
+        result = null;
     }
     function Begin() {
         window._slide_id = Office.context.document.settings.get('SlideID');
