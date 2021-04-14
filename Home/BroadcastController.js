@@ -90,10 +90,10 @@
     function updateLoop() {
         // Office.context.document.getActiveViewAsync(getActiveViewCallback);
         var promise = new OfficeExtension.Promise(function (resolve) {
-            resolve();
-            // Office.context.document.getActiveViewAsync(function(asyncResult) {
-            //     resolve();
-            // });
+            // resolve();
+            Office.context.document.getActiveViewAsync(function(asyncResult) {
+                resolve();
+            });
         }).then(function(result) {
             console.log('resolved');
         });
@@ -105,7 +105,7 @@
         window._broadcase_id = Office.context.document.settings.get('BroadcastID');
         window._meeting_id = Office.context.document.settings.get('MeetingID');
         if (window._broadcase_id != null) {
-            setInterval(updateLoop, 1000);
+            setInterval(updateLoop, 2000);
         }
     }
     $scope.RedirectToMeetings = function () {
