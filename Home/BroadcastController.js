@@ -108,9 +108,9 @@
         var BroadcastID = Office.context.document.settings.get('BroadcastID');
         var MeetingID = Office.context.document.settings.get('MeetingID');
         if ($scope.BroadcastSymbol == '▶') {
-            UpdateBroadcast("ready", MeetingID, BroadcastID);
-        } else {
             UpdateBroadcast("live", MeetingID, BroadcastID);
+        } else {
+            UpdateBroadcast("ready", MeetingID, BroadcastID);
         }
     }
 }];
