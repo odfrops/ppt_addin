@@ -1,12 +1,13 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
+    $scope.BroadcastSymbol = '&#9658;';
     UpdateBroadcastLink();
 
     function UpdateBroadcastStatus(Status) {
-        if (Status != "ready") {
-            $("#status").html('Stop');
-        } else if (Status != "live") {
-            $("#status").html('Start');
+        if (Status === 'live') {
+            $scope.BroadcastSymbol = '&#8718;';
+        } else {
+            $scope.BroadcastSymbol = '&#9658;';
         }
     }
 
@@ -17,15 +18,6 @@
             "Accept": "application/json",
             "Authorization": "Bearer " + User.Token
         };
-        // These poll types are not broadcastable right now.
-        var unsupportedTypes = [
-            // Surveys are just poll containers.
-            "group",
-            // Survey poll dividers are stub objects.
-            "divider",
-            // Grid polls are not supported as of March '19, but will be in future.
-            "rated-multiple"
-        ];
         AngularServices.GET("meetings/" + MeetingID + "/polls/", headers).
             then(function (response) {
                 switch (response.status) {
@@ -113,11 +105,10 @@
     }
 
     $scope.UpdateStatus = function () {
-        var Status = $('#status').html()
-        if (Status == 'Start') {
-            UpdateBroadcast("live", MeetingID, BroadcastID);
-        } else {
+        if ($scope.BroadcastSymbol == '&#9658;') {
             UpdateBroadcast("ready", MeetingID, BroadcastID);
+        } else {
+            UpdateBroadcast("live", MeetingID, BroadcastID);
         }
     }
 }];
