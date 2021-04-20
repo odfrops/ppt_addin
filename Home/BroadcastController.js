@@ -48,7 +48,7 @@
             "Accept": "application/json",
             "Authorization": "Bearer " + User.Token
         };
-        var data = Status
+        var data = '"' + Status + '"'
         // var data = {
         //     "state": Status
         // };
