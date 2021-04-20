@@ -17,17 +17,7 @@
         Office.context.document.settings.set('BroadcastStatus', 'ready');
         Office.context.document.settings.set('BroadcastID', BroadcastID );
         Office.context.document.settings.set('MeetingID', $scope.meetingID);
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-            Office.context.document.settings.set('SlideID', r.value.slides[0].id);
-            Office.context.document.settings.saveAsync(function (asyncResult) {
-                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                    console.log('Settings save failed. Error: ' + asyncResult.error.message);
-                } else {
-                    console.log('Settings saved.');
-                }
-                Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
-            });
-        });
+        Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
     }
     $scope.Polls = [];
     $scope.CleanPoll = function (poll) {
@@ -42,10 +32,6 @@
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Authorization": "Bearer " + User.Token
-        };
-        var data = {
-            "email": User.Email,
-            "password": User.Password
         };
         // These poll types are not broadcastable right now.
         var unsupportedTypes = [

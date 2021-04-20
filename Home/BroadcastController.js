@@ -1,29 +1,55 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
     UpdateBroadcastLink();
-    function EndBroadcast(MeetingID, BroadcastID) {
-        if (GetBroadcastStatus() != "ready")
-            UpdateBroadcast("ready", MeetingID, BroadcastID);
-    }
-    function StartBroadcast(MeetingID, BroadcastID) {
-        if (GetBroadcastStatus() != "live")
-            UpdateBroadcast("live", MeetingID, BroadcastID);
-    }
-    function UpdateBroadcastStatus(Status) {
-        Office.context.document.settings.set('BroadcastStatus', Status);
-        Office.context.document.settings.saveAsync(function (asyncResult) {
-            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                console.log('Settings save failed. Error: ' + asyncResult.error.message);
-            } else {
-                console.log('Settings saved.');
-            }
-        });
-    }
-    function GetBroadcastStatus() {
-        return Office.context.document.settings.get('BroadcastStatus');
-    }
-    function UpdateBroadcast(Status, MeetingID, BroadcastID) {
 
+    function UpdateBroadcastStatus(Status) {
+        if (Status != "ready") {
+            $("#status").html('Stop');
+        } else if (Status != "live") {
+            $("#status").html('Start');
+        }
+    }
+
+    function GetPollState(MeetingID, BroadcastID) {
+        var User = getCurrentUser();
+        var headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer " + User.Token
+        };
+        // These poll types are not broadcastable right now.
+        var unsupportedTypes = [
+            // Surveys are just poll containers.
+            "group",
+            // Survey poll dividers are stub objects.
+            "divider",
+            // Grid polls are not supported as of March '19, but will be in future.
+            "rated-multiple"
+        ];
+        AngularServices.GET("meetings/" + MeetingID + "/polls/", headers).
+            then(function (response) {
+                switch (response.status) {
+                    case 200:
+                        var polls = Array.isArray(response.data.result) ? response.data.result : [];
+                        polls = polls.filter(function(poll) {
+                            return poll.id == BroadcastID;
+                        });
+                        if (polls.length > 0) {
+                            var poll = polls[0];
+                            UpdateBroadcastStatus(poll.state);
+                        }
+                        break;
+                    case 401:
+                        AngularServices.RenewTokenOrLogout(GetPolls(pollID));
+                        break;
+                    default:
+                        Redirect("Login.html");
+                        break;
+                }
+            });
+    }
+
+    function UpdateBroadcast(Status, MeetingID, BroadcastID) {
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
@@ -48,6 +74,7 @@
                 }
             });
     }
+
     function UpdateBroadcastLink() {
         var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
@@ -63,58 +90,15 @@
             Begin();
         }
     }
-    window.getActiveViewCallback = function getActiveViewCallback(asyncResult) {
-        if (asyncResult.status == "failed") {
-            console.log("Action failed with error: " + asyncResult.error.message);
-        }
-        else {
-            // if (asyncResult.value == 'read')
-            //     Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-            //         if (r.status != "failed") {
-            //             if (window._slide_id == r.value.slides[0].id) {
 
-            //                 StartBroadcast(window._meeting_id, window._broadcase_id);
-            //             }
-            //             else {
-            //                 EndBroadcast(window._meeting_id, window._broadcase_id);
-            //             }
-            //         }
-
-
-            //     });
-            // else {
-            //     EndBroadcast(window._meeting_id, window._broadcase_id);
-            // }
-        }
-    }
-    window._asyncCount = 0;
-    async function updateLoop() {
-        // Office.context.document.getActiveViewAsync(getActiveViewCallback);
-        var promise = new OfficeExtension.Promise(function (resolve) {
-            Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function(asyncResult) {
-                resolve(asyncResult);
-            });
-        });
-        var result = await promise;
-        console.log(result);
-        promise = null;
-        result = null;
-        if (window._asyncCount < 100) {
-            ++ window._asyncCount;
-        } else {
-            window._asyncCount = 0;
-            clearInterval(window._interval_id);
-            window.location.reload();
-        }
-    }
     function Begin() {
-        window._slide_id = Office.context.document.settings.get('SlideID');
-        window._broadcase_id = Office.context.document.settings.get('BroadcastID');
-        window._meeting_id = Office.context.document.settings.get('MeetingID');
-        if (window._broadcase_id != null) {
-            window._interval_id = setInterval(updateLoop, 100);
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        if (BroadcastID != null) {
+            GetPollState(MeetingID, BroadcastID)
         }
     }
+
     $scope.RedirectToMeetings = function () {
         Office.context.document.settings.set('BroadcastLink', null);
         var MeetingID = Office.context.document.settings.get('MeetingID');
@@ -126,6 +110,15 @@
             }
             Redirect("Polls.html?meetingID=" + MeetingID)
         });
+    }
+
+    $scope.UpdateStatus = function () {
+        var Status = $('#status').html()
+        if (Status == 'Start') {
+            UpdateBroadcast("live", MeetingID, BroadcastID);
+        } else {
+            UpdateBroadcast("ready", MeetingID, BroadcastID);
+        }
     }
 }];
 
