@@ -48,10 +48,11 @@
             "Accept": "application/json",
             "Authorization": "Bearer " + User.Token
         };
-        var data = {
-            "state": Status
-        };
-        AngularServices.PUT("meetings/" + MeetingID + "/polls/" + BroadcastID, data, headers).
+        var data = Status
+        // var data = {
+        //     "state": Status
+        // };
+        AngularServices.PUT("meetings/" + MeetingID + "/polls/" + BroadcastID + "/state", data, headers).
             then(function (response) {
                 switch (response.status) {
                     case 204:
