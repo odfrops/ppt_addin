@@ -1,13 +1,13 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
-    $scope.BroadcastSymbol = '&#9658;';
+    $scope.BroadcastSymbol = '▶';
     UpdateBroadcastLink();
 
     function UpdateBroadcastStatus(Status) {
         if (Status === 'live') {
-            $scope.BroadcastSymbol = '&#8718;';
+            $scope.BroadcastSymbol = '◼';
         } else {
-            $scope.BroadcastSymbol = '&#9658;';
+            $scope.BroadcastSymbol = '▶';
         }
     }
 
@@ -105,7 +105,9 @@
     }
 
     $scope.UpdateStatus = function () {
-        if ($scope.BroadcastSymbol == '&#9658;') {
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        if ($scope.BroadcastSymbol == '▶') {
             UpdateBroadcast("ready", MeetingID, BroadcastID);
         } else {
             UpdateBroadcast("live", MeetingID, BroadcastID);
