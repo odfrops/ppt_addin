@@ -1,40 +1,58 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
+    $scope.BroadcastSymbol = '▶';
     UpdateBroadcastLink();
-    function EndBroadcast(MeetingID, BroadcastID) {
-        if (GetBroadcastStatus() != "ready")
-            UpdateBroadcast("ready", MeetingID, BroadcastID);
-    }
-    function StartBroadcast(MeetingID, BroadcastID) {
-        if (GetBroadcastStatus() != "live")
-            UpdateBroadcast("live", MeetingID, BroadcastID);
-    }
-    function UpdateBroadcastStatus(Status) {
-        Office.context.document.settings.set('BroadcastStatus', Status);
-        Office.context.document.settings.saveAsync(function (asyncResult) {
-            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                console.log('Settings save failed. Error: ' + asyncResult.error.message);
-            } else {
-                console.log('Settings saved.');
-            }
 
-        });
+    function UpdateBroadcastStatus(Status) {
+        if (Status === 'live') {
+            $scope.BroadcastSymbol = '◼';
+        } else {
+            $scope.BroadcastSymbol = '▶';
+        }
     }
-    function GetBroadcastStatus() {
-        return Office.context.document.settings.get('BroadcastStatus');
-    }
-    function UpdateBroadcast(Status, MeetingID, BroadcastID) {
-      
+
+    function GetPollState(MeetingID, BroadcastID) {
         var User = getCurrentUser();
         var headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Authorization": "Bearer " + User.Token
         };
-        var data = {
-            "state": Status
+        AngularServices.GET("meetings/" + MeetingID + "/polls/", headers).
+            then(function (response) {
+                switch (response.status) {
+                    case 200:
+                        var polls = Array.isArray(response.data.result) ? response.data.result : [];
+                        polls = polls.filter(function(poll) {
+                            return poll.id == BroadcastID;
+                        });
+                        if (polls.length > 0) {
+                            var poll = polls[0];
+                            UpdateBroadcastStatus(poll.state);
+                        }
+                        break;
+                    case 401:
+                        AngularServices.RenewTokenOrLogout(GetPolls(pollID));
+                        break;
+                    default:
+                        Redirect("Login.html");
+                        break;
+                }
+            });
+    }
+
+    function UpdateBroadcast(Status, MeetingID, BroadcastID) {
+        var User = getCurrentUser();
+        var headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer " + User.Token
         };
-        AngularServices.PUT("meetings/" + MeetingID + "/polls/" + BroadcastID, data, headers).
+        var data = '"' + Status + '"'
+        // var data = {
+        //     "state": Status
+        // };
+        AngularServices.PUT("meetings/" + MeetingID + "/polls/" + BroadcastID + "/state", data, headers).
             then(function (response) {
                 switch (response.status) {
                     case 204:
@@ -47,13 +65,11 @@
                         //Redirect("Login.html");
                         break;
                 }
-            }
-            );
-
-
+            });
     }
+
     function UpdateBroadcastLink() {
-            var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
+        var Link = decodeURIComponent(getQueryStringValue("BroadcastLink"));
         var User = getCurrentUser();
         Office.initialize = function (reason) {
             var BroadcastID = Office.context.document.settings.get('BroadcastID');
@@ -65,52 +81,18 @@
             $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
             $scope.$apply();
             Begin();
-
         }
-       
-        
-        //$sce.trustAsResourceUrl(Link);
-         
-          
-       
     }
 
- 
     function Begin() {
-            var SlideID = Office.context.document.settings.get('SlideID');
-            var BroadcastID = Office.context.document.settings.get('BroadcastID');
-            var MeetingID = Office.context.document.settings.get('MeetingID');
-            if (BroadcastID != null) {
-                window.setInterval(function () {
-                    Office.context.document.getActiveViewAsync(function (asyncResult) {
-                        if (asyncResult.status == "failed") {
-                            console.log("Action failed with error: " + asyncResult.error.message);
-                        }
-                        else {
-                            if (asyncResult.value == 'read')
-                                Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange, function (r) {
-                                    if (r.status != "failed") {
-                                        if (SlideID == r.value.slides[0].id) {
-
-                                            StartBroadcast(MeetingID, BroadcastID);
-                                        }
-                                        else {
-                                            EndBroadcast(MeetingID, BroadcastID);
-                                        }
-                                    }
-
-
-                                });
-                            else {
-                                EndBroadcast(MeetingID, BroadcastID);
-                            }
-                        }
-                    });
-                }, 1000);
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        if (BroadcastID != null) {
+            GetPollState(MeetingID, BroadcastID)
         }
     }
-    $scope.RedirectToMeetings = function () {
 
+    $scope.RedirectToMeetings = function () {
         Office.context.document.settings.set('BroadcastLink', null);
         var MeetingID = Office.context.document.settings.get('MeetingID');
         Office.context.document.settings.saveAsync(function (asyncResult) {
@@ -121,9 +103,17 @@
             }
             Redirect("Polls.html?meetingID=" + MeetingID)
         });
-       
     }
 
+    $scope.UpdateStatus = function () {
+        var BroadcastID = Office.context.document.settings.get('BroadcastID');
+        var MeetingID = Office.context.document.settings.get('MeetingID');
+        if ($scope.BroadcastSymbol == '▶') {
+            UpdateBroadcast("live", MeetingID, BroadcastID);
+        } else {
+            UpdateBroadcast("ready", MeetingID, BroadcastID);
+        }
+    }
 }];
 
 app.controller("myCtrl", myCtrl);
