@@ -29,6 +29,9 @@
                         if (polls.length > 0) {
                             var poll = polls[0];
                             UpdateBroadcastStatus(poll.state);
+                            if (poll.state !== 'live') {
+                                UpdateBroadcast("live", MeetingID, BroadcastID);
+                            }
                         }
                         break;
                     case 401:
