@@ -15,6 +15,7 @@
 
     function RedirectToMeetingsOrBroadcast() {
         var BroadcastLink = Office.context.document.settings.get('BroadcastLink');
+        console.log(BroadcastLink);
         if (BroadcastLink != null) {
             Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
         }
