@@ -17,7 +17,14 @@
         Office.context.document.settings.set('BroadcastStatus', 'ready');
         Office.context.document.settings.set('BroadcastID', BroadcastID );
         Office.context.document.settings.set('MeetingID', $scope.meetingID);
-        Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
+        Office.context.document.settings.saveAsync(function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                console.log('Settings save failed. Error: ' + asyncResult.error.message);
+            } else {
+                console.log('Settings saved.');
+            }
+            Redirect("Broadcast.html?BroadcastLink=" + encodeURIComponent(BroadcastLink));
+        })
     }
     $scope.Polls = [];
     $scope.CleanPoll = function (poll) {
