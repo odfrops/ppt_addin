@@ -91,6 +91,7 @@
             Begin();
 
             Office.context.document.getActiveViewAsync(function (asyncResult) {
+                console.log('getting active view', asyncResult)
                 if (asyncResult.status !== "failed") {
                     if (asyncResult.value === "edit") {
                         ShowBroadcast = "block";
