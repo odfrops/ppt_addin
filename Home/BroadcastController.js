@@ -1,13 +1,16 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
     $scope.BroadcastSymbol = '▶';
+    $scope.BroadcastTooltip = 'Start poll';
     UpdateBroadcastLink();
 
     function UpdateBroadcastStatus(Status) {
         if (Status === 'live') {
             $scope.BroadcastSymbol = '◼';
+            $scope.BroadcastTooltip = 'Stop poll';
         } else {
             $scope.BroadcastSymbol = '▶';
+            $scope.BroadcastTooltip = 'Start poll';
         }
     }
 
