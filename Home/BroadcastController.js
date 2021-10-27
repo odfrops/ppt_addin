@@ -100,6 +100,12 @@
                     }
                 }
             });
+
+            window.activeViewHandler = function (args) {
+                console.log('active view changed', args);
+            }
+        
+            Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler);
         }
     }
 
