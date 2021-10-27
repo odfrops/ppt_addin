@@ -2,6 +2,8 @@
 
     $scope.BroadcastSymbol = '▶';
     $scope.BroadcastTooltip = 'Start poll';
+    ShowBroadcast = 'none';
+
     UpdateBroadcastLink();
 
     function UpdateBroadcastStatus(Status) {
@@ -87,6 +89,16 @@
             $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
             $scope.$apply();
             Begin();
+
+            Office.context.document.getActiveViewAsync(function (asyncResult) {
+                if (asyncResult.status !== "failed") {
+                    if (asyncResult.value === "edit") {
+                        ShowBroadcast = "block";
+                    } else {
+                        ShowBroadcast = "none";
+                    }
+                }
+            });
         }
     }
 
