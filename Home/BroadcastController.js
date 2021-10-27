@@ -2,7 +2,7 @@
 
     $scope.BroadcastSymbol = '▶';
     $scope.BroadcastTooltip = 'Start poll';
-    ShowBroadcast = 'none';
+    $scope.ShowBroadcast = 'none';
 
     UpdateBroadcastLink();
 
@@ -94,9 +94,9 @@
                 console.log('getting active view', asyncResult)
                 if (asyncResult.status !== "failed") {
                     if (asyncResult.value === "edit") {
-                        ShowBroadcast = "block";
+                        $scope.ShowBroadcast = "block";
                     } else {
-                        ShowBroadcast = "none";
+                        $scope.ShowBroadcast = "none";
                     }
                 }
             });
@@ -104,7 +104,7 @@
             window.activeViewHandler = function (args) {
                 console.log('active view changed', args);
             }
-        
+
             Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler);
         }
     }
