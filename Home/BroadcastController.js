@@ -1,13 +1,18 @@
 ﻿var myCtrl = ['$scope', 'AngularServices', '$sce', function ($scope, AngularServices, $sce) {
 
     $scope.BroadcastSymbol = '▶';
+    $scope.BroadcastTooltip = 'Start poll';
+    $scope.ShowBroadcast = 'none';
+
     UpdateBroadcastLink();
 
     function UpdateBroadcastStatus(Status) {
         if (Status === 'live') {
             $scope.BroadcastSymbol = '◼';
+            $scope.BroadcastTooltip = 'Stop poll';
         } else {
             $scope.BroadcastSymbol = '▶';
+            $scope.BroadcastTooltip = 'Start poll';
         }
     }
 
@@ -84,6 +89,23 @@
             $scope.BroadcastLink = $sce.trustAsResourceUrl(Link);
             $scope.$apply();
             Begin();
+
+            Office.context.document.getActiveViewAsync(function (asyncResult) {
+                console.log('getting active view', asyncResult)
+                if (asyncResult.status !== "failed") {
+                    if (asyncResult.value === "edit") {
+                        $scope.ShowBroadcast = "block";
+                    } else {
+                        $scope.ShowBroadcast = "none";
+                    }
+                }
+            });
+
+            window.activeViewHandler = function (args) {
+                console.log('active view changed', args);
+            }
+
+            Office.context.document.addHandlerAsync(Office.EventType.ActiveViewChanged, window.activeViewHandler);
         }
     }
 

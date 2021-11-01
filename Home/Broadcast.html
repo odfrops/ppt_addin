@@ -23,8 +23,8 @@
 <body data-ng-app="myApp" data-ng-controller="myCtrl">
     <div style="position:relative;">
         <div id="leftDiv">
-            <button ng-click="RedirectToMeetings()" class="btn btn-default" style="font-weight: bold; font-size: 20px;"> < </button>
-            <button ng-click="UpdateStatus()" class="btn btn-default" id="status" style="font-weight: bold; font-size: 20px; display: none;"> {{BroadcastSymbol}} </button>
+            <button ng-click="RedirectToMeetings()" class="btn btn-default" style="font-weight: bold; font-size: 20px; display: {{ShowBroadcast}};"> < </button>
+            <button ng-click="UpdateStatus()" class="btn btn-default" id="status" style="width: 38px; height: 40px; margin-top: 2px;" title="{{BroadcastTooltip}}"> {{BroadcastSymbol}} </button>
         </div>
         <div id="rightDiv">
             <iframe frameborder="0" ng-src="{{BroadcastLink}}"></iframe>
